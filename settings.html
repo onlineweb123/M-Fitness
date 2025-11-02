@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ta">
 <head>
 <meta charset="UTF-8">
@@ -35,11 +36,17 @@ header{
 }
 
 .sidebar{
-  width:250px; background:#fff; position:fixed; top:0; bottom:0; left:-260px; padding-top:75px; border-right:1px solid var(--border); z-index:20;
+  width:250px; background:#ffffffee; position:fixed; top:0; bottom:0; left:-260px; 
+  padding-top:75px; border-right:1px solid var(--border); transition:.35s;
+  backdrop-filter:blur(10px);
+  z-index:20;
 }
 .sidebar.open{left:0;}
-.overlay{position:fixed; inset:0; background:#0006; display:none; z-index:15;}
-.overlay.show{display:block;}
+.sidebar a{
+  display:flex; align-items:center; padding:16px 22px; font-size:17px; 
+  text-decoration:none; color:var(--text); border-bottom:1px solid #f1f4f6;
+}
+.sidebar a:hover{background:#f8fffd; color:var(--accent); padding-left:28px;}
 
 .main{
   position:absolute; top:65px; bottom:65px; left:0; right:0;
@@ -52,7 +59,7 @@ header{
 }
 
 input,select{
-  width:100%; padding:12px; margin:8px 0; border-radius:10px;
+  width:94%; padding:12px; margin:8px 0; border-radius:10px;
   border:1px solid var(--border); font-size:14px;
 }
 
@@ -92,8 +99,11 @@ input,select{
   <a href="index.html">🏠 Dashboard</a>
   <a href="workouts.html">🔥 Workouts</a>
   <a href="diet.html">🥗 Diet Plans</a>
+  <a href="progress.html">📊 Progress Tracker</a>
   <a href="profile.html">👤 Profile</a>
+  <a href="settings.html">⚙️ Settings</a>
 </div>
+
 <div id="overlay" class="overlay" onclick="toggleMenu()"></div>
 
 <div class="main">
