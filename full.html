@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>💥 Full Body Workout</title>
+
+<style>
+  body {
+    margin:0;
+    font-family: "Poppins", sans-serif;
+    background:#f8fafc;
+    color:#222;
+  }
+
+  header {
+    padding:18px;
+    text-align:center;
+    font-size:22px;
+    font-weight:700;
+    background:white;
+    border-bottom:1px solid #e5e7eb;
+    position:sticky;top:0;
+  }
+
+  main{padding:18px;}
+
+  .card {
+    background:white;
+    border:1px solid #e5e7eb;
+    padding:18px;
+    border-radius:14px;
+    margin-bottom:18px;
+    box-shadow:0 4px 10px rgba(0,0,0,0.05);
+  }
+
+  h2 {margin:0 0 10px;font-size:20px;color:#0a3d62;}
+  ul {padding-left:20px;}
+  li {margin:4px 0;}
+
+  table {
+    width:100%;
+    border-collapse: collapse;
+    margin-top:12px;
+  }
+
+  th,td{
+    padding:10px;
+    font-size:14px;
+    border-bottom:1px solid #e5e7eb;
+  }
+
+  th{
+    background:#0a3d62;
+    color:white;
+  }
+
+  .yt-btn {
+    display:block;
+    width:100%;
+    padding:14px;
+    background:#ff0000;
+    text-align:center;
+    border-radius:10px;
+    color:white;
+    font-weight:700;
+    margin-top:12px;
+    text-decoration:none;
+    transition:0.2s;
+  }
+  .yt-btn:hover {transform:scale(1.05);}
+
+  /* Timer */
+  .timer-box{text-align:center;margin-top:20px;}
+
+  .timer-btn{
+    width:120px;height:120px;border-radius:50%;
+    background:#0a3d62;
+    color:white;font-weight:700;
+    border:none;font-size:20px;
+    margin:10px;
+    box-shadow:0 6px 15px rgba(0,0,0,0.2);
+  }
+
+  #display{
+    margin-top:18px;
+    font-size:30px;
+    font-weight:700;
+    color:#0a3d62;
+  }
+
+  .blink{animation:blink 1s infinite;}
+  @keyframes blink {50%{opacity:0.4}}
+</style>
+</head>
+
+<body>
+
+<header>💥 Full Body Day</header>
+
+<main>
+
+<div class="card">
+  <h2>🎯 இலக்கு</h2>
+  <p><b>Full Body Strength + Hypertrophy</b> ✅</p>
+  ✅ Overall Muscle Growth  
+  ✅ Conditioning  
+  ✅ Fat Burn + Strength  
+</div>
+
+<div class="card">
+  <h2>⚠️ முக்கிய Tips</h2>
+  <ul>
+    <li>Full warm-up 5 mins 🏃‍♂️</li>
+    <li>Compound lifts first</li>
+    <li>Controlled reps & breathing 🎯</li>
+  </ul>
+</div>
+
+<div class="card">
+  <h2>💪 Workout Plan</h2>
+
+  <table>
+    <tr><th>Exercise</th><th>Sets</th><th>Reps</th></tr>
+
+    <tr><td>🏋️ Barbell Squat</td><td>4</td><td>8–10</td></tr>
+    <tr><td>🏋️ Bench Press</td><td>3</td><td>8–10</td></tr>
+    <tr><td>🏋️ Deadlift</td><td>3</td><td>5–8</td></tr>
+    <tr><td>🏋️ Shoulder Press</td><td>3</td><td>8–12</td></tr>
+    <tr><td>💪 Barbell Row</td><td>3</td><td>10</td></tr>
+    <tr><td>🔗 Plank</td><td>3</td><td>45–60 sec</td></tr>
+  </table>
+
+  <a class="yt-btn" target="_blank" href="https://youtu.be/UBY1TrgPo3w">📺 Full Body Guide Video</a>
+  <a class="yt-btn" style="background:#ff8c00" target="_blank" href="https://youtu.be/I0zwIYwqCLA">📺 Form & Tips Video</a>
+</div>
+
+<div class="card timer-box">
+  <h2>⏳ Rest Timer</h2>
+
+  <button class="timer-btn" id="btn60">60 sec</button>
+  <button class="timer-btn" id="btn90">90 sec</button>
+
+  <div id="display">Ready 🔥</div>
+</div>
+
+</main>
+
+<script>
+  const display=document.getElementById("display");
+  let run=false;
+
+  function timer(sec){
+    if(run) return;
+    run=true;
+    let t=sec;
+    display.textContent=t+"s";
+    display.classList.add("blink");
+
+    let x=setInterval(()=>{
+      t--; display.textContent=t+"s";
+      if(t<=0){
+        clearInterval(x);
+        display.classList.remove("blink");
+        display.textContent="Go 💪";
+        run=false;
+        if(navigator.vibrate) navigator.vibrate(400);
+      }
+    },1000);
+  }
+
+  document.getElementById("btn60").onclick=()=>timer(60);
+  document.getElementById("btn90").onclick=()=>timer(90);
+</script>
+
+</body>
+</html>

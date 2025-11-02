@@ -1,0 +1,2909 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>🥗 Diet - Maathu Fitness</title>
+
+<style>
+:root{
+  --bg:#eef3f8;
+  --card:#ffffffcc;
+  --border:#d7e0ea;
+  --accent:#007bff;
+  --text:#1c1c1c;
+  --blur:blur(18px);
+}
+
+body{
+  margin:0;
+  font-family:'Poppins',sans-serif;
+  background:var(--bg);
+  color:var(--text);
+}
+*,button,a{transition:0.25s;}
+
+header{
+  height:60px;display:flex;align-items:center;justify-content:center;
+  font-size:19px;font-weight:700;
+  position:fixed;top:0;left:0;right:0;
+  background:#0a74ff;color:white;
+  z-index:10;
+}
+.menu-btn{position:absolute;left:14px;font-size:26px;background:none;border:none;color:white;cursor:pointer;}
+
+.sidebar{
+  width:250px;background:#ffffffdd;backdrop-filter:var(--blur);
+  position:fixed;top:0;bottom:0;left:-260px;padding-top:75px;
+  border-right:1px solid var(--border);z-index:20;
+}
+.sidebar.open{left:0;}
+.sidebar a{
+  display:flex;align-items:center;gap:10px;
+  padding:16px 22px;font-size:17px;color:var(--text);
+  text-decoration:none;border-bottom:1px solid #f1f4f6;font-weight:500;
+}
+.sidebar a:hover{background:#f8fffd;color:var(--accent);padding-left:28px;}
+
+.overlay{position:fixed;inset:0;background:#0006;display:none;z-index:15;}
+.overlay.show{display:block;}
+
+.main{position:absolute;top:65px;bottom:65px;left:0;right:0;overflow-y:auto;padding:18px;}
+
+.section-title{font-size:18px;font-weight:700;margin:16px 0 10px;color:#084c9e;}
+
+.diet-card{
+  background:var(--card);
+  padding:18px;border-radius:14px;margin-bottom:12px;
+  border:1px solid var(--border);
+  box-shadow:0 6px 10px rgba(0,0,0,.07);
+  cursor:pointer;
+}
+.diet-card:hover{transform:scale(1.02);border-color:var(--accent);}
+.diet-card h3{margin:0;font-size:18px;font-weight:700;}
+.diet-card p{margin:5px 0 0;font-size:14px;opacity:.75;}
+
+.bottom{
+  height:60px;position:fixed;bottom:0;left:0;right:0;
+  display:flex;justify-content:space-around;align-items:center;
+  background:#ffffffcc;border-top:1px solid var(--border);
+}
+.bottom button{
+  background:none;border:none;font-size:13px;display:flex;flex-direction:column;
+  align-items:center;opacity:.6;font-weight:600;cursor:pointer;
+}
+.bottom button.active,.bottom button:hover{opacity:1;color:var(--accent);transform:scale(1.1);}
+.bottom button span{font-size:22px;}
+</style>
+</head>
+
+<body>
+
+<header>
+  <button class="menu-btn" onclick="toggleMenu()">☰</button>
+  🥗 Diet Plans
+</header>
+
+<div id="sidebar" class="sidebar">
+  <a href="index.html">🏠 Dashboard</a>
+  <a href="workouts.html">🔥 Workouts</a>
+  <a href="diet.html">🥗 Diet Plans</a>
+  <a href="progress.html">📊 Progress Tracker</a>
+  <a href="profile.html">👤 Profile</a>
+  <a href="settings.html">⚙️ Settings</a>
+</div>
+
+<div id="overlay" class="overlay" onclick="toggleMenu()"></div>
+
+<div class="main">
+
+ <!DOCTYPE html>
+<html lang="ta">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nutrition Info - 100g Food Data</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Tamil&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Noto Sans Tamil', sans-serif;
+      background: #f5f7fa;
+      margin: 0;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: auto;
+    }
+
+    .card {
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+
+    h2 {
+      color: #1f2937;
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+
+    .nutri-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 8px 0;
+      border-bottom: 1px solid #eee;
+    }
+
+    .nutri-item:last-child {
+      border-bottom: none;
+    }
+
+    .label {
+      color: #4b5563;
+      font-weight: 500;
+    }
+
+    .value {
+      color: #111827;
+      font-weight: bold;
+    }
+
+    .note {
+      margin-top: 10px;
+      font-size: 14px;
+      color: #6b7280;
+    }
+
+    .gi-box {
+      background: #fef3c7;
+      padding: 8px;
+      border-radius: 10px;
+      margin-top: 15px;
+    }
+
+  </style>
+</head>
+<body>
+    
+    <!-- Search Box ஆரம்பம்  -->
+    
+    <!-- 🌿 Stylish Search Box -->
+<style>
+  .search-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 500px;
+    margin: 30px auto;
+    border: 2px solid #28a745;
+    border-radius: 40px;
+    overflow: hidden;
+    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.15);
+    background: #fff;
+  }
+
+  .search-container input {
+    flex: 1;
+    padding: 14px 18px;
+    border: none;
+    font-size: 17px;
+    outline: none;
+    background: transparent;
+    color: #333;
+  }
+
+  .search-container button {
+    background-color: #28a745;
+    color: white;
+    padding: 14px 18px;
+    border: none;
+    cursor: pointer;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s ease;
+  }
+
+  .search-container button:hover {
+    background-color: #218838;
+  }
+
+  .search-container button i {
+    font-style: normal;
+  }
+
+  @media (max-width: 600px) {
+    .search-container {
+      max-width: 95%;
+    }
+
+    .search-container input {
+      font-size: 16px;
+    }
+
+    .search-container button {
+      font-size: 18px;
+    }
+  }
+</style>
+
+<!-- 🔍 Search Box + Icon -->
+<div class="search-container">
+  <input type="text" id="searchInput" placeholder="🔍 தேடுங்கள்... (உதாரணம்: வெண்டைக்காய், GI, 89 Kcal)">
+  <button><i>🔍</i></button>
+</div>
+
+<!-- 🔁 Functional Script -->
+<script>
+  document.getElementById('searchInput').addEventListener('input', function () {
+    const searchValue = this.value.toLowerCase().trim();
+    const cards = document.querySelectorAll('.card');
+
+    cards.forEach(card => {
+      const fullText = card.textContent.toLowerCase();
+      if (fullText.includes(searchValue)) {
+        card.style.display = '';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  });
+</script>
+    
+    
+    <!-- Search Box முடிவு     -->
+    
+    
+    
+    
+    
+    
+  <div class="container">
+    <div class="card">
+        
+        
+        
+    <div class="card">
+  <h2>🥚 முட்டை (முழு முட்டை) – 100 கிராம்</h2>
+  <div class="nutri-item">
+    <div class="label">Protein</div>
+    <div class="value">12.6 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Carbohydrates</div>
+    <div class="value">0.7 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Fat</div>
+    <div class="value">10.6 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Calories</div>
+    <div class="value">143 Kcal</div>
+  </div>
+  <div class="gi-box">
+    <strong>Glycemic Index (GI):</strong> 0 → <span style="color:green;">மிகவும் குறைவானது</span>
+  </div>
+</div>    
+        <div class="card">
+  <h2>🍗 கோழி இறைச்சி (Chicken Breast – 100 கிராம்)</h2>
+  <div class="nutri-item">
+    <div class="label">Protein</div>
+    <div class="value">31.0 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Carbohydrates</div>
+    <div class="value">0 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Fat</div>
+    <div class="value">3.6 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Calories</div>
+    <div class="value">165 Kcal</div>
+  </div>
+  <div class="gi-box">
+    <strong>Glycemic Index (GI):</strong> 0 → <span style="color:green;">மிகவும் குறைவானது</span>
+  </div>
+</div>
+        
+        <div class="card">
+  <h2>🐟 மீன் (Seer Fish – 100 கிராம்)</h2>
+  <div class="nutri-item">
+    <div class="label">Protein</div>
+    <div class="value">25.0 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Carbohydrates</div>
+    <div class="value">0 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Fat</div>
+    <div class="value">7.0 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Calories</div>
+    <div class="value">170 Kcal</div>
+  </div>
+  <div class="gi-box">
+    <strong>Glycemic Index (GI):</strong> 0 → <span style="color:green;">மிகவும் குறைவானது</span>
+  </div>
+</div>
+        
+        <div class="card">
+  <h2>🥚 முட்டை (Boiled Egg – 100 கிராம்)</h2>
+  <div class="nutri-item">
+    <div class="label">Protein</div>
+    <div class="value">13.0 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Carbohydrates</div>
+    <div class="value">1.1 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Fat</div>
+    <div class="value">11.0 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Calories</div>
+    <div class="value">155 Kcal</div>
+  </div>
+  <div class="gi-box">
+    <strong>Glycemic Index (GI):</strong> 0 → <span style="color:green;">மிகவும் குறைவானது</span>
+  </div>
+</div>
+        
+        
+        <div class="card">
+  <h2>🍗 சிக்கன் (Boiled Chicken – 100 கிராம்)</h2>
+  <div class="nutri-item">
+    <div class="label">Protein</div>
+    <div class="value">27.0 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Carbohydrates</div>
+    <div class="value">0.0 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Fat</div>
+    <div class="value">3.6 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Calories</div>
+    <div class="value">165 Kcal</div>
+  </div>
+  <div class="gi-box">
+    <strong>Glycemic Index (GI):</strong> 0 → <span style="color:green;">மிகவும் குறைவானது</span>
+  </div>
+</div>
+
+<div class="card">
+  <h2>🐟 மீன் (Boiled Fish – 100 கிராம்)</h2>
+  <div class="nutri-item">
+    <div class="label">Protein</div>
+    <div class="value">22.0 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Carbohydrates</div>
+    <div class="value">0.0 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Fat</div>
+    <div class="value">5.0 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Calories</div>
+    <div class="value">140 Kcal</div>
+  </div>
+  <div class="gi-box">
+    <strong>Glycemic Index (GI):</strong> 0 → <span style="color:green;">மிகவும் குறைவானது</span>
+  </div>
+</div>
+
+
+<div class="card">
+  <h2>🍳 முட்டை (Boiled Egg – 100 கிராம்)</h2>
+  <div class="nutri-item">
+    <div class="label">Protein</div>
+    <div class="value">13.0 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Carbohydrates</div>
+    <div class="value">1.1 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Fat</div>
+    <div class="value">11.0 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Calories</div>
+    <div class="value">155 Kcal</div>
+  </div>
+  <div class="gi-box">
+    <strong>Glycemic Index (GI):</strong> 0 → <span style="color:green;">மிகவும் குறைவானது</span>
+  </div>
+</div>
+
+
+<div class="card">
+  <h2>🥔 உருளைக்கிழங்கு (Boiled – 100 கிராம்)</h2>
+  <div class="nutri-item">
+    <div class="label">Protein</div>
+    <div class="value">1.9 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Carbohydrates</div>
+    <div class="value">20.0 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Fat</div>
+    <div class="value">0.1 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Calories</div>
+    <div class="value">87 Kcal</div>
+  </div>
+  <div class="gi-box">
+    <strong>Glycemic Index (GI):</strong> 78 → 
+    <span style="color:red;">உயர் GI (வேகமாக சர்க்கரை அதிகரிக்கும்)</span>
+  </div>
+</div>
+
+
+<div class="card">
+  <h2>🎃 பூசணிக்காய் (Ash Gourd – 100 கிராம்)</h2>
+  <div class="nutri-item">
+    <div class="label">Protein</div>
+    <div class="value">0.2 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Carbohydrates</div>
+    <div class="value">3.0 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Fat</div>
+    <div class="value">0.1 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Calories</div>
+    <div class="value">13 Kcal</div>
+  </div>
+  <div class="gi-box">
+    <strong>Glycemic Index (GI):</strong> 15 → 
+    <span style="color:green;">குறைந்த GI (தீர்மானமான உசிர்வு)</span>
+  </div>
+</div>
+
+
+<div class="card">
+  <h2>🌿 முருங்கைக்காய் (Drumstick – 100 கிராம்)</h2>
+  <div class="nutri-item">
+    <div class="label">Protein</div>
+    <div class="value">2.5 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Carbohydrates</div>
+    <div class="value">8.5 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Fat</div>
+    <div class="value">0.1 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Calories</div>
+    <div class="value">42 Kcal</div>
+  </div>
+  <div class="gi-box">
+    <strong>Glycemic Index (GI):</strong> 20 → 
+    <span style="color:green;">குறைந்த GI (அருமையான தேர்வு)</span>
+  </div>
+</div>
+
+
+<div class="card">
+  <h2>🍆 கத்தரிக்காய் (Brinjal – 100 கிராம்)</h2>
+  <div class="nutri-item">
+    <div class="label">Protein</div>
+    <div class="value">1.0 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Carbohydrates</div>
+    <div class="value">6.0 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Fat</div>
+    <div class="value">0.2 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Calories</div>
+    <div class="value">25 Kcal</div>
+  </div>
+  <div class="gi-box">
+    <strong>Glycemic Index (GI):</strong> 15 → 
+    <span style="color:green;">குறைந்த GI (Excellent)</span>
+  </div>
+</div>
+
+
+<div class="card">
+  <h2>🌱 பீன்ஸ் (Beans – 100 கிராம்)</h2>
+  <div class="nutri-item">
+    <div class="label">Protein</div>
+    <div class="value">2.4 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Carbohydrates</div>
+    <div class="value">7.1 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Fat</div>
+    <div class="value">0.1 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Calories</div>
+    <div class="value">31 Kcal</div>
+  </div>
+  <div class="gi-box">
+    <strong>Glycemic Index (GI):</strong> 30 → 
+    <span style="color:green;">குறைந்த GI (Excellent)</span>
+  </div>
+</div>
+
+
+
+<div class="card">
+  <h2>🌿 முருங்கைக்காய் (Drumstick – 100 கிராம்)</h2>
+  <div class="nutri-item">
+    <div class="label">Protein</div>
+    <div class="value">2.5 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Carbohydrates</div>
+    <div class="value">8.5 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Fat</div>
+    <div class="value">0.1 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Calories</div>
+    <div class="value">37 Kcal</div>
+  </div>
+  <div class="gi-box">
+    <strong>Glycemic Index (GI):</strong> 40 → 
+    <span style="color:green;">குறைந்த GI (Safe)</span>
+  </div>
+</div>
+
+
+<div class="card">
+  <h2>🥒 புடலங்காய் (Snake Gourd – 100 கிராம்)</h2>
+  <div class="nutri-item">
+    <div class="label">Protein</div>
+    <div class="value">0.5 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Carbohydrates</div>
+    <div class="value">3.0 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Fat</div>
+    <div class="value">0.1 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Calories</div>
+    <div class="value">14 Kcal</div>
+  </div>
+  <div class="gi-box">
+    <strong>Glycemic Index (GI):</strong> 30 → 
+    <span style="color:green;">மிக குறைந்த GI (Very Safe)</span>
+  </div>
+</div>
+
+
+
+<div class="card">
+  <h2>🍈 சுரைக்காய் (Bottle Gourd – 100 கிராம்)</h2>
+  <div class="nutri-item">
+    <div class="label">Protein</div>
+    <div class="value">0.6 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Carbohydrates</div>
+    <div class="value">3.7 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Fat</div>
+    <div class="value">0.1 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Calories</div>
+    <div class="value">15 Kcal</div>
+  </div>
+  <div class="gi-box">
+    <strong>Glycemic Index (GI):</strong> 20 → 
+    <span style="color:green;">மிகக் குறைந்த GI (Very Safe)</span>
+  </div>
+</div>
+
+
+
+<div class="card">
+  <h2>🌱 வெண்டை (Lady's Finger – 100 கிராம்)</h2>
+  <div class="nutri-item">
+    <div class="label">Protein</div>
+    <div class="value">1.9 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Carbohydrates</div>
+    <div class="value">7.5 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Fat</div>
+    <div class="value">0.2 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Calories</div>
+    <div class="value">33 Kcal</div>
+  </div>
+  <div class="gi-box">
+    <strong>Glycemic Index (GI):</strong> 20 → 
+    <span style="color:green;">மிகக் குறைந்த GI (Very Safe)</span>
+  </div>
+</div>
+
+
+
+<div class="card">
+  <h2>💪 முருங்கைக்காய் (Drumstick – 100 கிராம்)</h2>
+  <div class="nutri-item">
+    <div class="label">Protein</div>
+    <div class="value">2.1 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Carbohydrates</div>
+    <div class="value">8.5 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Fat</div>
+    <div class="value">0.5 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Calories</div>
+    <div class="value">37 Kcal</div>
+  </div>
+  <div class="gi-box">
+    <strong>Glycemic Index (GI):</strong> 30 →
+    <span style="color:green;">குறைந்த GI (Safe)</span>
+  </div>
+</div>
+
+
+<div class="card">
+  <h2>🥒 சுரைக்காய் (Bottle Gourd – 100 கிராம்)</h2>
+  <div class="nutri-item">
+    <div class="label">Protein</div>
+    <div class="value">0.6 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Carbohydrates</div>
+    <div class="value">3.7 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Fat</div>
+    <div class="value">0.1 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Calories</div>
+    <div class="value">14 Kcal</div>
+  </div>
+  <div class="gi-box">
+    <strong>Glycemic Index (GI):</strong> 15 →
+    <span style="color:green;">மிக குறைந்த GI (Highly Safe)</span>
+  </div>
+</div>
+
+
+<div class="card">
+  <h2>🥗 பீர்க்கங்காய் (Ridge Gourd – 100 கிராம்)</h2>
+  <div class="nutri-item">
+    <div class="label">Protein</div>
+    <div class="value">0.5 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Carbohydrates</div>
+    <div class="value">2.9 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Fat</div>
+    <div class="value">0.2 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Calories</div>
+    <div class="value">13 Kcal</div>
+  </div>
+  <div class="gi-box">
+    <strong>Glycemic Index (GI):</strong> 15 →
+    <span style="color:green;">மிக குறைந்த GI (Highly Safe)</span>
+  </div>
+</div>
+
+
+
+<div class="card">
+  <h2>🥒 புடலங்காய் (Snake Gourd – 100 கிராம்)</h2>
+  <div class="nutri-item">
+    <div class="label">Protein</div>
+    <div class="value">0.5 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Carbohydrates</div>
+    <div class="value">3.0 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Fat</div>
+    <div class="value">0.3 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Calories</div>
+    <div class="value">18 Kcal</div>
+  </div>
+  <div class="gi-box">
+    <strong>Glycemic Index (GI):</strong> 15 →
+    <span style="color:green;">மிக குறைந்த GI (Highly Safe)</span>
+  </div>
+</div>
+
+
+<div class="card">
+  <h2>🥬 பாகற்காய் (Bitter Gourd – 100 கிராம்)</h2>
+  <div class="nutri-item">
+    <div class="label">Protein</div>
+    <div class="value">1.0 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Carbohydrates</div>
+    <div class="value">3.7 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Fat</div>
+    <div class="value">0.2 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Calories</div>
+    <div class="value">19 Kcal</div>
+  </div>
+  <div class="gi-box">
+    <strong>Glycemic Index (GI):</strong> 18 →
+    <span style="color:green;">மிக குறைந்த GI (Safe for Diabetics)</span>
+  </div>
+</div>
+
+
+
+
+<div class="card">
+  <h2>🟢 வெண்டை (Ladies Finger – 100 கிராம்)</h2>
+  <div class="nutri-item">
+    <div class="label">Protein</div>
+    <div class="value">2.0 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Carbohydrates</div>
+    <div class="value">7.0 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Fat</div>
+    <div class="value">0.1 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Calories</div>
+    <div class="value">33 Kcal</div>
+  </div>
+  <div class="gi-box">
+    <strong>Glycemic Index (GI):</strong> 20 →
+    <span style="color:green;">மிக குறைந்த GI</span>
+  </div>
+</div>
+
+
+
+<div class="card">
+  <h2>🟢 சுரைக்காய் (Bottle Gourd – 100 கிராம்)</h2>
+  <div class="nutri-item">
+    <div class="label">Protein</div>
+    <div class="value">0.6 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Carbohydrates</div>
+    <div class="value">3.7 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Fat</div>
+    <div class="value">0.1 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Calories</div>
+    <div class="value">14 Kcal</div>
+  </div>
+  <div class="gi-box">
+    <strong>Glycemic Index (GI):</strong> 15 →
+    <span style="color:green;">மிகக் குறைந்த GI</span>
+  </div>
+</div>
+
+
+
+<div class="card">
+  <h2>🟢 பீர்க்கங்காய் (Ridge Gourd – 100 கிராம்)</h2>
+  <div class="nutri-item">
+    <div class="label">Protein</div>
+    <div class="value">0.5 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Carbohydrates</div>
+    <div class="value">3.4 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Fat</div>
+    <div class="value">0.2 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Calories</div>
+    <div class="value">13 Kcal</div>
+  </div>
+  <div class="gi-box">
+    <strong>Glycemic Index (GI):</strong> 15 →
+    <span style="color:green;">மிகக் குறைந்த GI</span>
+  </div>
+</div>
+
+
+
+
+<div class="card">
+  <h2>🟢 புடலங்காய் (Snake Gourd – 100 கிராம்)</h2>
+  <div class="nutri-item">
+    <div class="label">Protein</div>
+    <div class="value">0.6 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Carbohydrates</div>
+    <div class="value">3.0 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Fat</div>
+    <div class="value">0.3 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Calories</div>
+    <div class="value">18 Kcal</div>
+  </div>
+  <div class="gi-box">
+    <strong>Glycemic Index (GI):</strong> 15 →
+    <span style="color:green;">மிகக் குறைந்த GI</span>
+  </div>
+</div>
+
+
+
+<div class="card">
+  <h2>🟢 கோஸு (Cabbage – 100 கிராம்)</h2>
+  <div class="nutri-item">
+    <div class="label">Protein</div>
+    <div class="value">1.3 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Carbohydrates</div>
+    <div class="value">5.8 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Fat</div>
+    <div class="value">0.1 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Calories</div>
+    <div class="value">25 Kcal</div>
+  </div>
+  <div class="gi-box">
+    <strong>Glycemic Index (GI):</strong> 10 →
+    <span style="color:green;">மிகக் குறைந்த GI</span>
+  </div>
+</div>
+
+
+
+<div class="card">
+  <h2>🟢 முட்டைக்கோஸ் (Cauliflower – 100 கிராம்)</h2>
+  <div class="nutri-item">
+    <div class="label">Protein</div>
+    <div class="value">1.9 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Carbohydrates</div>
+    <div class="value">4.9 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Fat</div>
+    <div class="value">0.3 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Calories</div>
+    <div class="value">25 Kcal</div>
+  </div>
+  <div class="gi-box">
+    <strong>Glycemic Index (GI):</strong> 15 →
+    <span style="color:green;">மிகக் குறைந்த GI</span>
+  </div>
+</div>
+
+
+
+
+<div class="card">
+  <h2>🟢 ப்ரோக்கோலி (Broccoli – 100 கிராம்)</h2>
+  <div class="nutri-item">
+    <div class="label">Protein</div>
+    <div class="value">2.8 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Carbohydrates</div>
+    <div class="value">6.6 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Fat</div>
+    <div class="value">0.4 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Calories</div>
+    <div class="value">34 Kcal</div>
+  </div>
+  <div class="gi-box">
+    <strong>Glycemic Index (GI):</strong> 10 →
+    <span style="color:green;">மிகக் குறைந்த GI</span>
+  </div>
+</div>
+
+
+
+<div class="card">
+  <h2>🟢 பீன்ஸ் (Beans – 100 கிராம்)</h2>
+  <div class="nutri-item">
+    <div class="label">Protein</div>
+    <div class="value">1.8 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Carbohydrates</div>
+    <div class="value">7.1 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Fat</div>
+    <div class="value">0.1 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Calories</div>
+    <div class="value">31 Kcal</div>
+  </div>
+  <div class="gi-box">
+    <strong>Glycemic Index (GI):</strong> 15 →
+    <span style="color:green;">மிகக் குறைந்த GI</span>
+  </div>
+</div>
+
+
+
+
+<div class="card">
+  <h2>🟠 கேரட் (Carrot – 100 கிராம்)</h2>
+  <div class="nutri-item">
+    <div class="label">Protein</div>
+    <div class="value">0.9 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Carbohydrates</div>
+    <div class="value">9.6 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Fat</div>
+    <div class="value">0.2 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Calories</div>
+    <div class="value">41 Kcal</div>
+  </div>
+  <div class="gi-box">
+    <strong>Glycemic Index (GI):</strong> 35 →
+    <span style="color:green;">குறைந்த GI</span>
+  </div>
+</div>
+
+
+
+<div class="card">
+  <h2>⚪ முள்ளங்கி (Radish – 100 கிராம்)</h2>
+  <div class="nutri-item">
+    <div class="label">Protein</div>
+    <div class="value">0.7 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Carbohydrates</div>
+    <div class="value">3.4 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Fat</div>
+    <div class="value">0.1 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Calories</div>
+    <div class="value">16 Kcal</div>
+  </div>
+  <div class="gi-box">
+    <strong>Glycemic Index (GI):</strong> 32 →
+    <span style="color:green;">குறைந்த GI</span>
+  </div>
+</div>
+
+
+
+
+<div class="card">
+  <h2>🟢 வெண்டைக்காய் (Lady's Finger – 100 கிராம்)</h2>
+  <div class="nutri-item">
+    <div class="label">Protein</div>
+    <div class="value">1.9 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Carbohydrates</div>
+    <div class="value">6.4 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Fat</div>
+    <div class="value">0.1 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Calories</div>
+    <div class="value">33 Kcal</div>
+  </div>
+  <div class="gi-box">
+    <strong>Glycemic Index (GI):</strong> 20 →
+    <span style="color:green;">மிகக் குறைந்த GI</span>
+  </div>
+</div>
+
+
+
+<div class="card">
+  <h2>🟢 சுரைக்காய் (Bottle Gourd – 100 கிராம்)</h2>
+  <div class="nutri-item">
+    <div class="label">Protein</div>
+    <div class="value">0.6 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Carbohydrates</div>
+    <div class="value">3.7 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Fat</div>
+    <div class="value">0.1 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Calories</div>
+    <div class="value">14 Kcal</div>
+  </div>
+  <div class="gi-box">
+    <strong>Glycemic Index (GI):</strong> 15 →
+    <span style="color:green;">மிகக் குறைந்த GI</span>
+  </div>
+</div>
+
+
+
+<div class="card">
+  <h2>🟢 புடலங்காய் (Snake Gourd – 100 கிராம்)</h2>
+  <div class="nutri-item">
+    <div class="label">Protein</div>
+    <div class="value">0.5 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Carbohydrates</div>
+    <div class="value">3.0 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Fat</div>
+    <div class="value">0.2 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Calories</div>
+    <div class="value">18 Kcal</div>
+  </div>
+  <div class="gi-box">
+    <strong>Glycemic Index (GI):</strong> 15 →
+    <span style="color:green;">மிகக் குறைந்த GI</span>
+  </div>
+</div>
+
+
+<div class="card">
+  <h2>🟢 பீர்க்கங்காய் (Ridge Gourd – 100 கிராம்)</h2>
+  <div class="nutri-item">
+    <div class="label">Protein</div>
+    <div class="value">0.6 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Carbohydrates</div>
+    <div class="value">3.5 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Fat</div>
+    <div class="value">0.1 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Calories</div>
+    <div class="value">20 Kcal</div>
+  </div>
+  <div class="gi-box">
+    <strong>Glycemic Index (GI):</strong> 15 →
+    <span style="color:green;">மிகக் குறைந்த GI</span>
+  </div>
+</div>
+
+
+
+<div class="card">
+  <h2>🟢 சுரைக்காய் (Bottle Gourd – 100 கிராம்)</h2>
+  <div class="nutri-item">
+    <div class="label">Protein</div>
+    <div class="value">0.6 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Carbohydrates</div>
+    <div class="value">3.7 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Fat</div>
+    <div class="value">0.1 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Calories</div>
+    <div class="value">15 Kcal</div>
+  </div>
+  <div class="gi-box">
+    <strong>Glycemic Index (GI):</strong> 15 →
+    <span style="color:green;">மிகக் குறைந்த GI</span>
+  </div>
+</div>
+
+
+
+
+<div class="card">
+  <h2>🟡 சேனைக்கிழங்கு (Elephant Foot Yam – 100 கிராம்)</h2>
+  <div class="nutri-item">
+    <div class="label">Protein</div>
+    <div class="value">1.5 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Carbohydrates</div>
+    <div class="value">24 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Fat</div>
+    <div class="value">0.4 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Calories</div>
+    <div class="value">108 Kcal</div>
+  </div>
+  <div class="gi-box">
+    <strong>Glycemic Index (GI):</strong> 50 →
+    <span style="color:blue;">மிதமான GI</span>
+  </div>
+</div>
+
+
+
+
+<div class="card">
+  <h2>🟢 வெண்டைக்காய் (Ladies Finger – 100 கிராம்)</h2>
+  <div class="nutri-item">
+    <div class="label">Protein</div>
+    <div class="value">1.9 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Carbohydrates</div>
+    <div class="value">6.5 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Fat</div>
+    <div class="value">0.1 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Calories</div>
+    <div class="value">33 Kcal</div>
+  </div>
+  <div class="gi-box">
+    <strong>Glycemic Index (GI):</strong> 20 →
+    <span style="color:green;">குறைந்த GI</span>
+  </div>
+</div>
+
+
+
+
+<div class="card">
+  <h2>🟢 வெள்ளரிக்காய் (Cucumber – 100 கிராம்)</h2>
+  <div class="nutri-item">
+    <div class="label">Protein</div>
+    <div class="value">0.7 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Carbohydrates</div>
+    <div class="value">3.6 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Fat</div>
+    <div class="value">0.1 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Calories</div>
+    <div class="value">16 Kcal</div>
+  </div>
+  <div class="gi-box">
+    <strong>Glycemic Index (GI):</strong> 15 →
+    <span style="color:green;">குறைந்த GI</span>
+  </div>
+</div>
+
+
+
+
+<div class="card">
+  <h2>🟢 வெள்ளரி விதைகள் (Cucumber Seeds – 100 கிராம்)</h2>
+  <div class="nutri-item">
+    <div class="label">Protein</div>
+    <div class="value">21.0 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Carbohydrates</div>
+    <div class="value">17.0 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Fat</div>
+    <div class="value">45.0 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Calories</div>
+    <div class="value">550 Kcal</div>
+  </div>
+  <div class="gi-box">
+    <strong>Glycemic Index (GI):</strong> ~10 →
+    <span style="color:green;">குறைந்த GI</span>
+  </div>
+</div>
+
+
+
+
+<div class="card">
+  <h2>🟢 பூசணி விதைகள் (Pumpkin Seeds – 100 கிராம்)</h2>
+  <div class="nutri-item">
+    <div class="label">Protein</div>
+    <div class="value">30.2 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Carbohydrates</div>
+    <div class="value">10.7 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Fat</div>
+    <div class="value">49.0 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Calories</div>
+    <div class="value">559 Kcal</div>
+  </div>
+  <div class="gi-box">
+    <strong>Glycemic Index (GI):</strong> ~15 →
+    <span style="color:green;">குறைந்த GI</span>
+  </div>
+</div>
+
+
+
+<div class="card">
+  <h2>🟡 சூரியகாந்தி விதைகள் (Sunflower Seeds – 100 கிராம்)</h2>
+  <div class="nutri-item">
+    <div class="label">Protein</div>
+    <div class="value">20.8 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Carbohydrates</div>
+    <div class="value">20.0 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Fat</div>
+    <div class="value">51.5 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Calories</div>
+    <div class="value">584 Kcal</div>
+  </div>
+  <div class="gi-box">
+    <strong>Glycemic Index (GI):</strong> ~20 →
+    <span style="color:green;">குறைந்த GI</span>
+  </div>
+</div>
+
+
+<div class="card">
+  <h2>🟤 பெருங்காயம் (Asafoetida – 100 கிராம்)</h2>
+  <div class="nutri-item">
+    <div class="label">Protein</div>
+    <div class="value">4.0 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Carbohydrates</div>
+    <div class="value">67.8 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Fat</div>
+    <div class="value">1.1 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Calories</div>
+    <div class="value">297 Kcal</div>
+  </div>
+  <div class="gi-box">
+    <strong>Glycemic Index (GI):</strong> ~30 →
+    <span style="color:green;">குறைந்த GI</span>
+  </div>
+</div>
+
+
+
+<div class="card">
+  <h2>⚪ கஸகஸா (Poppy Seeds – 100 கிராம்)</h2>
+  <div class="nutri-item">
+    <div class="label">Protein</div>
+    <div class="value">18.0 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Carbohydrates</div>
+    <div class="value">28.1 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Fat</div>
+    <div class="value">41.6 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Calories</div>
+    <div class="value">525 Kcal</div>
+  </div>
+  <div class="gi-box">
+    <strong>Glycemic Index (GI):</strong> ~35 →
+    <span style="color:green;">குறைந்த GI</span>
+  </div>
+</div>
+
+
+
+
+<div class="card">
+  <h2>💛 பாசிப்பருப்பு (Moong Dal – 100 கிராம்)</h2>
+  <div class="nutri-item">
+    <div class="label">Protein</div>
+    <div class="value">24.0 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Carbohydrates</div>
+    <div class="value">59.9 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Fat</div>
+    <div class="value">1.3 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Calories</div>
+    <div class="value">339 Kcal</div>
+  </div>
+  <div class="gi-box">
+    <strong>Glycemic Index (GI):</strong> ~25 →
+    <span style="color:green;">மிக குறைந்த GI</span>
+  </div>
+</div>
+
+
+
+<div class="card">
+  <h2>🌟 பயத்தம் பருப்பு (Toor Dal – 100 கிராம்)</h2>
+  <div class="nutri-item">
+    <div class="label">Protein</div>
+    <div class="value">22.3 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Carbohydrates</div>
+    <div class="value">61.1 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Fat</div>
+    <div class="value">1.6 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Calories</div>
+    <div class="value">343 Kcal</div>
+  </div>
+  <div class="gi-box">
+    <strong>Glycemic Index (GI):</strong> ~32 →
+    <span style="color:green;">மிதமான GI</span>
+  </div>
+</div>
+
+
+<div class="card">
+  <h2>🌟 கருப்பட்டி கடலை (Black Gram Dal – 100 கிராம்)</h2>
+  <div class="nutri-item">
+    <div class="label">Protein</div>
+    <div class="value">24.0 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Carbohydrates</div>
+    <div class="value">58.0 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Fat</div>
+    <div class="value">1.5 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Calories</div>
+    <div class="value">341 Kcal</div>
+  </div>
+  <div class="gi-box">
+    <strong>Glycemic Index (GI):</strong> ~30 →
+    <span style="color:green;">மிதமான GI</span>
+  </div>
+</div>
+
+
+
+<div class="card">
+  <h2>🌟 கொத்தவரை (Horse Gram – 100 கிராம்)</h2>
+  <div class="nutri-item">
+    <div class="label">Protein</div>
+    <div class="value">22.0 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Carbohydrates</div>
+    <div class="value">57.0 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Fat</div>
+    <div class="value">0.5 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Calories</div>
+    <div class="value">321 Kcal</div>
+  </div>
+  <div class="gi-box">
+    <strong>Glycemic Index (GI):</strong> ~25 →
+    <span style="color:green;">மிகவும் குறைவானது</span>
+  </div>
+</div>
+
+
+
+<div class="card">
+  <h2>🌟 வெள்ளரிக்காய் (Bottle Gourd – 100 கிராம்)</h2>
+  <div class="nutri-item">
+    <div class="label">Protein</div>
+    <div class="value">0.6 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Carbohydrates</div>
+    <div class="value">3.4 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Fat</div>
+    <div class="value">0.1 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Calories</div>
+    <div class="value">14 Kcal</div>
+  </div>
+  <div class="gi-box">
+    <strong>Glycemic Index (GI):</strong> 15 →
+    <span style="color:green;">மிகவும் குறைவானது</span>
+  </div>
+</div>
+
+
+
+<div class="card">
+  <h2>🍌 வாழை பழம் (Banana – 100 கிராம்)</h2>
+  <div class="nutri-item">
+    <div class="label">Protein</div>
+    <div class="value">1.1 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Carbohydrates</div>
+    <div class="value">23 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Fat</div>
+    <div class="value">0.3 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Calories</div>
+    <div class="value">89 Kcal</div>
+  </div>
+  <div class="gi-box">
+    <strong>Glycemic Index (GI):</strong> 51 →
+    <span style="color:orange;">மிதமானது</span>
+  </div>
+</div>
+
+
+
+<div class="card">
+  <h2>🥝 மாதுளை (Guava – 100 கிராம்)</h2>
+  <div class="nutri-item">
+    <div class="label">Protein</div>
+    <div class="value">2.6 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Carbohydrates</div>
+    <div class="value">14 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Fat</div>
+    <div class="value">0.9 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Calories</div>
+    <div class="value">68 Kcal</div>
+  </div>
+  <div class="gi-box">
+    <strong>Glycemic Index (GI):</strong> 12 →
+    <span style="color:green;">மிகவும் குறைவானது</span>
+  </div>
+</div>
+
+
+
+
+<div class="card">
+  <h2>🍈 சப்போட்டா (Sapota – 100 கிராம்)</h2>
+  <div class="nutri-item">
+    <div class="label">Protein</div>
+    <div class="value">0.4 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Carbohydrates</div>
+    <div class="value">20.1 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Fat</div>
+    <div class="value">1.1 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Calories</div>
+    <div class="value">83 Kcal</div>
+  </div>
+  <div class="gi-box">
+    <strong>Glycemic Index (GI):</strong> 55 →
+    <span style="color:orange;">மிதமானது</span>
+  </div>
+</div>
+
+
+
+<div class="card">
+  <h2>🍇 திராட்சை (Grapes – 100 கிராம்)</h2>
+  <div class="nutri-item">
+    <div class="label">Protein</div>
+    <div class="value">0.6 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Carbohydrates</div>
+    <div class="value">17.1 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Fat</div>
+    <div class="value">0.2 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Calories</div>
+    <div class="value">69 Kcal</div>
+  </div>
+  <div class="gi-box">
+    <strong>Glycemic Index (GI):</strong> 59 →
+    <span style="color:orange;">மிதமானது</span>
+  </div>
+</div>
+
+
+<div class="card">
+  <h2>🫐 ஜாமுன் (Black Plum – 100 கிராம்)</h2>
+  <div class="nutri-item">
+    <div class="label">Protein</div>
+    <div class="value">0.7 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Carbohydrates</div>
+    <div class="value">14.0 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Fat</div>
+    <div class="value">0.2 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Calories</div>
+    <div class="value">60 Kcal</div>
+  </div>
+  <div class="gi-box">
+    <strong>Glycemic Index (GI):</strong> 25 →
+    <span style="color:green;">குறைவானது</span>
+  </div>
+</div>
+
+
+<div class="card">
+  <h2>🍌 சேவ் வாழைப்பழம் (Ripe Banana – 100 கிராம்)</h2>
+  <div class="nutri-item">
+    <div class="label">Protein</div>
+    <div class="value">1.1 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Carbohydrates</div>
+    <div class="value">22.8 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Fat</div>
+    <div class="value">0.3 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Calories</div>
+    <div class="value">89 Kcal</div>
+  </div>
+  <div class="gi-box">
+    <strong>Glycemic Index (GI):</strong> 51 →
+    <span style="color:orange;">நடுத்தரமானது</span>
+  </div>
+</div>
+
+
+
+<div class="card">
+  <h2>🍋 எலுமிச்சை (Lemon – 100 கிராம்)</h2>
+  <div class="nutri-item">
+    <div class="label">Protein</div>
+    <div class="value">1.1 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Carbohydrates</div>
+    <div class="value">9.3 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Fat</div>
+    <div class="value">0.3 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Calories</div>
+    <div class="value">29 Kcal</div>
+  </div>
+  <div class="gi-box">
+    <strong>Glycemic Index (GI):</strong> 20 →
+    <span style="color:green;">தீவிரமாக குறைந்தது</span>
+  </div>
+</div>
+
+
+<div class="card">
+  <h2>🍍 அன்னாசி (Pineapple – 100 கிராம்)</h2>
+  <div class="nutri-item">
+    <div class="label">Protein</div>
+    <div class="value">0.5 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Carbohydrates</div>
+    <div class="value">13.1 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Fat</div>
+    <div class="value">0.1 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Calories</div>
+    <div class="value">50 Kcal</div>
+  </div>
+  <div class="gi-box">
+    <strong>Glycemic Index (GI):</strong> 59 →
+    <span style="color:orange;">நடுத்தர GI</span>
+  </div>
+</div>
+
+
+
+
+<div class="card">
+  <h2>🍉 தர்பூசணி (Watermelon – 100 கிராம்)</h2>
+  <div class="nutri-item">
+    <div class="label">Protein</div>
+    <div class="value">0.6 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Carbohydrates</div>
+    <div class="value">7.6 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Fat</div>
+    <div class="value">0.1 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Calories</div>
+    <div class="value">30 Kcal</div>
+  </div>
+  <div class="gi-box">
+    <strong>Glycemic Index (GI):</strong> 72 →
+    <span style="color:red;">உயர் GI</span>
+  </div>
+</div>
+
+
+
+<div class="card">
+  <h2>🍂 சபூதா (Sapota – 100 கிராம்)</h2>
+  <div class="nutri-item">
+    <div class="label">Protein</div>
+    <div class="value">0.4 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Carbohydrates</div>
+    <div class="value">20 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Fat</div>
+    <div class="value">1.1 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Calories</div>
+    <div class="value">83 Kcal</div>
+  </div>
+  <div class="gi-box">
+    <strong>Glycemic Index (GI):</strong> 65 →
+    <span style="color:orange;">நடுத்தர GI</span>
+  </div>
+</div>
+
+
+
+<div class="card">
+  <h2>🥭 மாங்காய் (Raw Mango – 100 கிராம்)</h2>
+  <div class="nutri-item">
+    <div class="label">Protein</div>
+    <div class="value">0.6 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Carbohydrates</div>
+    <div class="value">15 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Fat</div>
+    <div class="value">0.3 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Calories</div>
+    <div class="value">60 Kcal</div>
+  </div>
+  <div class="gi-box">
+    <strong>Glycemic Index (GI):</strong> 51 →
+    <span style="color:orange;">நடுத்தர GI</span>
+  </div>
+</div>
+
+
+
+<div class="card">
+  <h2>🥭 மாம்பழம் (Ripe Mango – 100 கிராம்)</h2>
+  <div class="nutri-item">
+    <div class="label">Protein</div>
+    <div class="value">0.8 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Carbohydrates</div>
+    <div class="value">15 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Fat</div>
+    <div class="value">0.4 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Calories</div>
+    <div class="value">60 Kcal</div>
+  </div>
+  <div class="gi-box">
+    <strong>Glycemic Index (GI):</strong> 56 →
+    <span style="color:orange;">நடுத்தர GI</span>
+  </div>
+</div>
+
+
+
+<div class="card">
+  <h2>🍍 அன்னாசி (Pineapple – 100 கிராம்)</h2>
+  <div class="nutri-item">
+    <div class="label">Protein</div>
+    <div class="value">0.5 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Carbohydrates</div>
+    <div class="value">13.1 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Fat</div>
+    <div class="value">0.1 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Calories</div>
+    <div class="value">50 Kcal</div>
+  </div>
+  <div class="gi-box">
+    <strong>Glycemic Index (GI):</strong> 59 →
+    <span style="color:orange;">நடுத்தர GI</span>
+  </div>
+</div>
+
+
+
+
+<div class="card">
+  <h2>🍉 மத்தளி பழம் (Watermelon – 100 கிராம்)</h2>
+  <div class="nutri-item">
+    <div class="label">Protein</div>
+    <div class="value">0.6 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Carbohydrates</div>
+    <div class="value">7.5 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Fat</div>
+    <div class="value">0.1 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Calories</div>
+    <div class="value">30 Kcal</div>
+  </div>
+  <div class="gi-box">
+    <strong>Glycemic Index (GI):</strong> 72 →
+    <span style="color:red;">உயர் GI</span>
+  </div>
+</div>
+
+
+
+
+<div class="card">
+  <h2>🥭 மாம்பழம் (Mango – 100 கிராம்)</h2>
+  <div class="nutri-item">
+    <div class="label">Protein</div>
+    <div class="value">0.8 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Carbohydrates</div>
+    <div class="value">15 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Fat</div>
+    <div class="value">0.4 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Calories</div>
+    <div class="value">60 Kcal</div>
+  </div>
+  <div class="gi-box">
+    <strong>Glycemic Index (GI):</strong> 56 →
+    <span style="color:orange;">மிதமான GI</span>
+  </div>
+</div>
+
+
+
+<div class="card">
+  <h2>🍏 சீதாப்பழம் (Custard Apple – 100 கிராம்)</h2>
+  <div class="nutri-item">
+    <div class="label">Protein</div>
+    <div class="value">1.7 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Carbohydrates</div>
+    <div class="value">24 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Fat</div>
+    <div class="value">0.6 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Calories</div>
+    <div class="value">94 Kcal</div>
+  </div>
+  <div class="gi-box">
+    <strong>Glycemic Index (GI):</strong> 54 →
+    <span style="color:orange;">மிதமான GI</span>
+  </div>
+</div>
+
+
+
+
+<div class="card">
+  <h2>🥬 முட்டைகோஸ் (Cabbage – 100 கிராம்)</h2>
+  <div class="nutri-item">
+    <div class="label">Protein</div>
+    <div class="value">1.3 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Carbohydrates</div>
+    <div class="value">5.8 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Fat</div>
+    <div class="value">0.1 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Calories</div>
+    <div class="value">25 Kcal</div>
+  </div>
+  <div class="gi-box">
+    <strong>Glycemic Index (GI):</strong> 10 →
+    <span style="color:green;">குறைந்த GI</span>
+  </div>
+</div>
+
+
+
+<div class="card">
+  <h2>🥦 பிரோகோலி (Broccoli – 100 கிராம்)</h2>
+  <div class="nutri-item">
+    <div class="label">Protein</div>
+    <div class="value">2.8 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Carbohydrates</div>
+    <div class="value">6.6 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Fat</div>
+    <div class="value">0.3 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Calories</div>
+    <div class="value">34 Kcal</div>
+  </div>
+  <div class="gi-box">
+    <strong>Glycemic Index (GI):</strong> 15 →
+    <span style="color:green;">குறைந்த GI</span>
+  </div>
+</div>
+
+
+
+<div class="card">
+  <h2>🥒 சுரைக்காய் (Bottle Gourd – 100 கிராம்)</h2>
+  <div class="nutri-item">
+    <div class="label">Protein</div>
+    <div class="value">0.6 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Carbohydrates</div>
+    <div class="value">3.7 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Fat</div>
+    <div class="value">0.1 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Calories</div>
+    <div class="value">14 Kcal</div>
+  </div>
+  <div class="gi-box">
+    <strong>Glycemic Index (GI):</strong> 15 →
+    <span style="color:green;">குறைந்த GI</span>
+  </div>
+</div>
+
+
+
+
+<div class="card">
+  <h2>🥔 சேப்பங்கிழங்கு (Taro Root – 100 கிராம்)</h2>
+  <div class="nutri-item">
+    <div class="label">Protein</div>
+    <div class="value">1.5 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Carbohydrates</div>
+    <div class="value">26 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Fat</div>
+    <div class="value">0.1 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Calories</div>
+    <div class="value">112 Kcal</div>
+  </div>
+  <div class="gi-box">
+    <strong>Glycemic Index (GI):</strong> 54 →
+    <span style="color:orange;">மிதமான GI</span>
+  </div>
+</div>
+
+
+
+<div class="card">
+  <h2>🍠 சிவக்கிழங்கு (Sweet Potato – 100 கிராம்)</h2>
+  <div class="nutri-item">
+    <div class="label">Protein</div>
+    <div class="value">1.6 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Carbohydrates</div>
+    <div class="value">20.1 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Fat</div>
+    <div class="value">0.1 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Calories</div>
+    <div class="value">86 Kcal</div>
+  </div>
+  <div class="gi-box">
+    <strong>Glycemic Index (GI):</strong> 44 →
+    <span style="color:green;">குறைவான GI</span>
+  </div>
+</div>
+
+
+
+<div class="card">
+  <h2>🌰 கருணை கிழங்கு (Yam – 100 கிராம்)</h2>
+  <div class="nutri-item">
+    <div class="label">Protein</div>
+    <div class="value">1.5 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Carbohydrates</div>
+    <div class="value">27.9 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Fat</div>
+    <div class="value">0.2 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Calories</div>
+    <div class="value">118 Kcal</div>
+  </div>
+  <div class="gi-box">
+    <strong>Glycemic Index (GI):</strong> 54 →
+    <span style="color:orange;">மிதமான GI</span>
+  </div>
+</div>
+
+
+
+<div class="card">
+  <h2>🌿 செம்பருத்திக் கிழங்கு (Taro – 100 கிராம்)</h2>
+  <div class="nutri-item">
+    <div class="label">Protein</div>
+    <div class="value">1.5 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Carbohydrates</div>
+    <div class="value">26.5 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Fat</div>
+    <div class="value">0.1 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Calories</div>
+    <div class="value">112 Kcal</div>
+  </div>
+  <div class="gi-box">
+    <strong>Glycemic Index (GI):</strong> 53 →
+    <span style="color:orange;">மிதமான GI</span>
+  </div>
+</div>
+
+
+
+<div class="card">
+  <h2>🐘 சேனைக் கிழங்கு (Elephant Yam – 100 கிராம்)</h2>
+  <div class="nutri-item">
+    <div class="label">Protein</div>
+    <div class="value">1.7 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Carbohydrates</div>
+    <div class="value">26.2 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Fat</div>
+    <div class="value">0.4 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Calories</div>
+    <div class="value">118 Kcal</div>
+  </div>
+  <div class="gi-box">
+    <strong>Glycemic Index (GI):</strong> 50 →
+    <span style="color:orange;">மிதமான GI</span>
+  </div>
+</div>
+
+
+
+
+<div class="card">
+  <h2>🌿 கற்கிழங்கு (Tapioca / Cassava – 100 கிராம்)</h2>
+  <div class="nutri-item">
+    <div class="label">Protein</div>
+    <div class="value">1.0 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Carbohydrates</div>
+    <div class="value">38.0 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Fat</div>
+    <div class="value">0.3 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Calories</div>
+    <div class="value">160 Kcal</div>
+  </div>
+  <div class="gi-box">
+    <strong>Glycemic Index (GI):</strong> 72 →
+    <span style="color:red;">உயர்ந்த GI</span>
+  </div>
+</div>
+
+
+
+
+<div class="card">
+  <h2>🌰 சூத்துக் கிழங்கு (Taro Root – 100 கிராம்)</h2>
+  <div class="nutri-item">
+    <div class="label">Protein</div>
+    <div class="value">1.5 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Carbohydrates</div>
+    <div class="value">34.6 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Fat</div>
+    <div class="value">0.1 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Calories</div>
+    <div class="value">142 Kcal</div>
+  </div>
+  <div class="gi-box">
+    <strong>Glycemic Index (GI):</strong> 54 →
+    <span style="color:orange;">மிதமான GI</span>
+  </div>
+</div>
+
+
+
+<div class="card">
+  <h2>🐘 சேப்பங்கிழங்கு (Elephant Foot Yam – 100 கிராம்)</h2>
+  <div class="nutri-item">
+    <div class="label">Protein</div>
+    <div class="value">1.7 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Carbohydrates</div>
+    <div class="value">26.0 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Fat</div>
+    <div class="value">0.4 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Calories</div>
+    <div class="value">118 Kcal</div>
+  </div>
+  <div class="gi-box">
+    <strong>Glycemic Index (GI):</strong> 51 →
+    <span style="color:orange;">மிதமான GI</span>
+  </div>
+</div>
+
+
+
+
+<div class="card">
+  <h2>🌿 காசினி கிழங்கு (Tapioca – 100 கிராம்)</h2>
+  <div class="nutri-item">
+    <div class="label">Protein</div>
+    <div class="value">0.6 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Carbohydrates</div>
+    <div class="value">38.1 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Fat</div>
+    <div class="value">0.2 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Calories</div>
+    <div class="value">157 Kcal</div>
+  </div>
+  <div class="gi-box">
+    <strong>Glycemic Index (GI):</strong> 80 →
+    <span style="color:red;">உயர்ந்த GI</span>
+  </div>
+</div>
+
+
+
+
+<div class="card">
+  <h2>🍠 சேனைக் கிழங்கு (Elephant Foot Yam – 100 கிராம்)</h2>
+  <div class="nutri-item">
+    <div class="label">Protein</div>
+    <div class="value">1.5 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Carbohydrates</div>
+    <div class="value">26.0 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Fat</div>
+    <div class="value">0.4 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Calories</div>
+    <div class="value">118 Kcal</div>
+  </div>
+  <div class="gi-box">
+    <strong>Glycemic Index (GI):</strong> 51 →
+    <span style="color:orange;">மிதமான GI</span>
+  </div>
+</div>
+
+
+
+
+
+<div class="card">
+  <h2>🥒 வெள்ளரிக்காய் (Cucumber – 100 கிராம்)</h2>
+  <div class="nutri-item">
+    <div class="label">Protein</div>
+    <div class="value">0.7 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Carbohydrates</div>
+    <div class="value">3.6 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Fat</div>
+    <div class="value">0.1 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Calories</div>
+    <div class="value">16 Kcal</div>
+  </div>
+  <div class="gi-box">
+    <strong>Glycemic Index (GI):</strong> 15 →
+    <span style="color:green;">குறைந்த GI</span>
+  </div>
+</div>
+
+
+
+
+<div class="card">
+  <h2>🥗 பீர்க்கங்காய் (Ridge Gourd – 100 கிராம்)</h2>
+  <div class="nutri-item">
+    <div class="label">Protein</div>
+    <div class="value">0.6 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Carbohydrates</div>
+    <div class="value">3.4 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Fat</div>
+    <div class="value">0.1 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Calories</div>
+    <div class="value">14 Kcal</div>
+  </div>
+  <div class="gi-box">
+    <strong>Glycemic Index (GI):</strong> 15 →
+    <span style="color:green;">குறைந்த GI</span>
+  </div>
+</div>
+
+
+
+
+<div class="card">
+  <h2>🥒 புடலங்காய் (Snake Gourd – 100 கிராம்)</h2>
+  <div class="nutri-item">
+    <div class="label">Protein</div>
+    <div class="value">0.5 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Carbohydrates</div>
+    <div class="value">3.0 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Fat</div>
+    <div class="value">0.3 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Calories</div>
+    <div class="value">18 Kcal</div>
+  </div>
+  <div class="gi-box">
+    <strong>Glycemic Index (GI):</strong> 15 →
+    <span style="color:green;">குறைந்த GI</span>
+  </div>
+</div>
+
+
+
+<div class="card">
+  <h2>🥥 சுரைக்காய் (Bottle Gourd – 100 கிராம்)</h2>
+  <div class="nutri-item">
+    <div class="label">Protein</div>
+    <div class="value">0.6 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Carbohydrates</div>
+    <div class="value">3.7 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Fat</div>
+    <div class="value">0.1 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Calories</div>
+    <div class="value">14 Kcal</div>
+  </div>
+  <div class="gi-box">
+    <strong>Glycemic Index (GI):</strong> 15 →
+    <span style="color:green;">குறைந்த GI</span>
+  </div>
+</div>
+
+
+
+
+<div class="card">
+  <h2>🥒 பீர்க்கங்காய் (Ridge Gourd – 100 கிராம்)</h2>
+  <div class="nutri-item">
+    <div class="label">Protein</div>
+    <div class="value">0.6 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Carbohydrates</div>
+    <div class="value">3.5 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Fat</div>
+    <div class="value">0.1 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Calories</div>
+    <div class="value">13 Kcal</div>
+  </div>
+  <div class="gi-box">
+    <strong>Glycemic Index (GI):</strong> 15 →
+    <span style="color:green;">குறைந்த GI</span>
+  </div>
+</div>
+
+
+
+
+
+<div class="card">
+  <h2>🥗 புடலங்காய் (Snake Gourd – 100 கிராம்)</h2>
+  <div class="nutri-item">
+    <div class="label">Protein</div>
+    <div class="value">0.6 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Carbohydrates</div>
+    <div class="value">3.0 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Fat</div>
+    <div class="value">0.3 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Calories</div>
+    <div class="value">18 Kcal</div>
+  </div>
+  <div class="gi-box">
+    <strong>Glycemic Index (GI):</strong> 15 →
+    <span style="color:green;">குறைந்த GI</span>
+  </div>
+</div>
+
+
+
+
+
+<div class="card">
+  <h2>😈 பாகற்காய் (Bitter Gourd – 100 கிராம்)</h2>
+  <div class="nutri-item">
+    <div class="label">Protein</div>
+    <div class="value">1.0 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Carbohydrates</div>
+    <div class="value">3.7 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Fat</div>
+    <div class="value">0.2 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Calories</div>
+    <div class="value">19 Kcal</div>
+  </div>
+  <div class="gi-box">
+    <strong>Glycemic Index (GI):</strong> 18 →
+    <span style="color:green;">குறைந்த GI</span>
+  </div>
+</div>
+
+
+
+
+
+<div class="card">
+  <h2>🥒 சுரைக்காய் (Bottle Gourd – 100 கிராம்)</h2>
+  <div class="nutri-item">
+    <div class="label">Protein</div>
+    <div class="value">0.6 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Carbohydrates</div>
+    <div class="value">3.7 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Fat</div>
+    <div class="value">0.1 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Calories</div>
+    <div class="value">14 Kcal</div>
+  </div>
+  <div class="gi-box">
+    <strong>Glycemic Index (GI):</strong> 15 →
+    <span style="color:green;">மிக குறைந்த GI</span>
+  </div>
+</div>
+
+
+<div class="card">
+  <h2>🥗 புடலங்காய் (Snake Gourd – 100 கிராம்)</h2>
+  <div class="nutri-item">
+    <div class="label">Protein</div>
+    <div class="value">0.5 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Carbohydrates</div>
+    <div class="value">3.0 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Fat</div>
+    <div class="value">0.3 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Calories</div>
+    <div class="value">18 Kcal</div>
+  </div>
+  <div class="gi-box">
+    <strong>Glycemic Index (GI):</strong> 15 →
+    <span style="color:green;">மிக குறைந்த GI</span>
+  </div>
+</div>
+
+
+
+
+<div class="card">
+  <h2>🍆 கத்தரிக்காய் (Brinjal – 100 கிராம்)</h2>
+  <div class="nutri-item">
+    <div class="label">Protein</div>
+    <div class="value">1.0 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Carbohydrates</div>
+    <div class="value">6.0 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Fat</div>
+    <div class="value">0.1 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Calories</div>
+    <div class="value">25 Kcal</div>
+  </div>
+  <div class="gi-box">
+    <strong>Glycemic Index (GI):</strong> 15 →
+    <span style="color:green;">மிகக் குறைந்த GI</span>
+  </div>
+</div>
+
+
+
+
+<div class="card">
+  <h2>💚 வெண்டைக்காய் (Okra – 100 கிராம்)</h2>
+  <div class="nutri-item">
+    <div class="label">Protein</div>
+    <div class="value">1.9 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Carbohydrates</div>
+    <div class="value">7.5 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Fat</div>
+    <div class="value">0.1 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Calories</div>
+    <div class="value">33 Kcal</div>
+  </div>
+  <div class="gi-box">
+    <strong>Glycemic Index (GI):</strong> 20 →
+    <span style="color:green;">மிகக் குறைந்த GI</span>
+  </div>
+</div>
+
+
+
+<div class="card">
+  <h2>🍅 தக்காளி (Tomato – 100 கிராம்)</h2>
+  <div class="nutri-item">
+    <div class="label">Protein</div>
+    <div class="value">0.9 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Carbohydrates</div>
+    <div class="value">3.9 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Fat</div>
+    <div class="value">0.2 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Calories</div>
+    <div class="value">18 Kcal</div>
+  </div>
+  <div class="gi-box">
+    <strong>Glycemic Index (GI):</strong> 15 →
+    <span style="color:green;">மிகக் குறைந்த GI</span>
+  </div>
+</div>
+
+
+
+<div class="card">
+  <h2>🥬 பீன்ஸ் (Beans – 100 கிராம்)</h2>
+  <div class="nutri-item">
+    <div class="label">Protein</div>
+    <div class="value">1.8 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Carbohydrates</div>
+    <div class="value">7 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Fat</div>
+    <div class="value">0.1 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Calories</div>
+    <div class="value">35 Kcal</div>
+  </div>
+  <div class="gi-box">
+    <strong>Glycemic Index (GI):</strong> 15 →
+    <span style="color:green;">மிகக் குறைந்த GI</span>
+  </div>
+</div>
+
+
+
+<div class="card">
+  <h2>🥒 புடலங்காய் (Snake Gourd – 100 கிராம்)</h2>
+  <div class="nutri-item">
+    <div class="label">Protein</div>
+    <div class="value">0.5 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Carbohydrates</div>
+    <div class="value">3.0 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Fat</div>
+    <div class="value">0.3 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Calories</div>
+    <div class="value">18 Kcal</div>
+  </div>
+  <div class="gi-box">
+    <strong>Glycemic Index (GI):</strong> 15 →
+    <span style="color:green;">மிகக் குறைந்த GI</span>
+  </div>
+</div>
+
+
+
+
+<div class="card">
+  <h2>🥗 பீர்க்கங்காய் (Ridge Gourd – 100 கிராம்)</h2>
+  <div class="nutri-item">
+    <div class="label">Protein</div>
+    <div class="value">0.6 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Carbohydrates</div>
+    <div class="value">3.1 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Fat</div>
+    <div class="value">0.2 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Calories</div>
+    <div class="value">17 Kcal</div>
+  </div>
+  <div class="gi-box">
+    <strong>Glycemic Index (GI):</strong> 15 →
+    <span style="color:green;">மிகக் குறைந்த GI</span>
+  </div>
+</div>
+
+
+
+<div class="card">
+  <h2>🥗 சுரைக்காய் (Bottle Gourd – 100 கிராம்)</h2>
+  <div class="nutri-item">
+    <div class="label">Protein</div>
+    <div class="value">0.6 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Carbohydrates</div>
+    <div class="value">3.7 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Fat</div>
+    <div class="value">0.1 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Calories</div>
+    <div class="value">19 Kcal</div>
+  </div>
+  <div class="gi-box">
+    <strong>Glycemic Index (GI):</strong> 15 →
+    <span style="color:green;">மிகக் குறைந்த GI</span>
+  </div>
+</div>
+
+
+
+<div class="card">
+  <h2>🌿 புடலங்காய் (Snake Gourd – 100 கிராம்)</h2>
+  <div class="nutri-item">
+    <div class="label">Protein</div>
+    <div class="value">0.5 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Carbohydrates</div>
+    <div class="value">3.0 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Fat</div>
+    <div class="value">0.3 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Calories</div>
+    <div class="value">18 Kcal</div>
+  </div>
+  <div class="gi-box">
+    <strong>Glycemic Index (GI):</strong> 15 →
+    <span style="color:green;">மிகக் குறைந்த GI</span>
+  </div>
+</div>
+
+
+
+
+<div class="card">
+  <h2>🎃 பூசணிக்காய் (Pumpkin – 100 கிராம்)</h2>
+  <div class="nutri-item">
+    <div class="label">Protein</div>
+    <div class="value">1.0 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Carbohydrates</div>
+    <div class="value">6.5 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Fat</div>
+    <div class="value">0.1 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Calories</div>
+    <div class="value">26 Kcal</div>
+  </div>
+  <div class="gi-box">
+    <strong>Glycemic Index (GI):</strong> 75 →
+    <span style="color:red;">அதிக GI</span>
+  </div>
+</div>
+
+
+
+
+<div class="card">
+  <h2>🟢 வெண்டைக்காய் (Okra – 100 கிராம்)</h2>
+  <div class="nutri-item">
+    <div class="label">Protein</div>
+    <div class="value">2.0 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Carbohydrates</div>
+    <div class="value">7.0 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Fat</div>
+    <div class="value">0.1 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Calories</div>
+    <div class="value">33 Kcal</div>
+  </div>
+  <div class="gi-box">
+    <strong>Glycemic Index (GI):</strong> 20 →
+    <span style="color:green;">குறைந்த GI</span>
+  </div>
+</div>
+
+
+
+
+
+
+<div class="card">
+  <h2>🟢 வாழைக்காய் (Raw Banana – 100 கிராம்)</h2>
+  <div class="nutri-item">
+    <div class="label">Protein</div>
+    <div class="value">1.0 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Carbohydrates</div>
+    <div class="value">22.8 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Fat</div>
+    <div class="value">0.2 g</div>
+  </div>
+  <div class="nutri-item">
+    <div class="label">Calories</div>
+    <div class="value">89 Kcal</div>
+  </div>
+  <div class="gi-box">
+    <strong>Glycemic Index (GI):</strong> 45 →
+    <span style="color:green;">குறைந்த GI</span>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+  <br>    <div class="note">
+        ⚠️ குறிப்பு: இந்த nutritional values சாமான்ய மதிப்பீடு ஆகும். உணவின் வகை, கறைப்பு, சமைப்பது போன்றவை மாற்றம் செய்யலாம்.
+      </div>
+    </div>
+  </div>
+</body>
+</html>
+
+
+</div>
+
+<div class="bottom">
+  <button onclick="location.href='index.html'"><span>🏠</span>Home</button>
+  <button onclick="location.href='workouts.html'"><span>🔥</span>Workout</button>
+  <button class="active" onclick="location.href='diet.html'"><span>🥗</span>Diet</button>
+  <button onclick="location.href='profile.html'"><span>👤</span>Profile</button>
+</div>
+
+<script>
+function toggleMenu(){
+  document.getElementById("sidebar").classList.toggle("open");
+  document.getElementById("overlay").classList.toggle("show");
+}
+
+// open diet plan page
+function openPlan(plan){
+  location.href = `diet_${plan}.html`;
+}
+</script>
+
+</body>
+</html>

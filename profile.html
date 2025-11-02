@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>Profile - Maathu Fitness</title>
+
+<style>
+:root{
+  --bg:#eef3f8;
+  --card:#ffffffdd;
+  --border:#d7e0ea;
+  --accent:#007bff;
+  --accent2:#00c08b;
+  --text:#1c1c1c;
+  --blur:blur(18px);
+}
+
+body{
+  margin:0;
+  font-family:'Poppins',Arial,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+}
+*,button,a{transition:0.25s;}
+
+header{
+  height:60px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:19px;
+  font-weight:700;
+  position:fixed;
+  top:0;left:0;right:0;
+  background:var(--accent);
+  z-index:10;
+  color:white;
+}
+.menu-btn{
+  position:absolute;left:14px;
+  font-size:26px;background:none;border:none;
+  color:white;cursor:pointer;
+}
+
+/* Sidebar */
+.sidebar{
+  width:250px;background:#fff;
+  position:fixed;top:0;bottom:0;left:-260px;
+  padding-top:70px;z-index:20;
+  border-right:1px solid var(--border);
+}
+.sidebar.open{left:0;}
+.sidebar a{
+  display:flex;padding:14px 20px;gap:10px;
+  font-size:17px;color:var(--text);
+  text-decoration:none;border-bottom:1px solid #f3f3f3;
+}
+.sidebar a:hover{
+  background:#f4fffc;color:var(--accent);
+  padding-left:28px;
+}
+.overlay{
+  position:fixed;inset:0;background:#0006;
+  display:none;z-index:15;
+}
+.overlay.show{display:block;}
+
+.main{padding:90px 15px 90px;}
+
+/* Profile Display */
+.profile-card{
+  background:var(--card);padding:15px;
+  border-radius:14px;box-shadow:0 4px 12px #0001;
+  text-align:center;margin-bottom:18px;
+}
+
+.profile-pic{
+  width:90px;height:90px;background:#ddd;
+  border-radius:50%;margin:auto;font-size:40px;
+  display:flex;align-items:center;justify-content:center;
+  border:4px solid var(--accent);
+}
+
+.tag{
+  display:inline-block;
+  background:#00c08b;
+  padding:6px 14px;
+  font-size:13px;
+  border-radius:20px;
+  color:white;
+  font-weight:700;
+  margin-top:6px;
+}
+
+h3{margin:10px 0 5px;}
+
+.info-row{
+  display:flex;justify-content:space-between;
+  padding:8px 0;font-size:15px;
+  border-bottom:1px solid #eee;
+}
+.info-row:last-child{border:none}
+
+/* Bottom Nav */
+.bottom{
+  height:60px;position:fixed;bottom:0;left:0;right:0;
+  display:flex;justify-content:space-around;align-items:center;
+  background:#fff;border-top:1px solid var(--border);
+}
+.bottom button{
+  background:none;border:none;
+  display:flex;flex-direction:column;
+  font-size:13px;opacity:.6;cursor:pointer;
+}
+.bottom button.active,
+.bottom button:hover{
+  opacity:1;color:var(--accent);
+  transform:scale(1.08);
+}
+.bottom button span{font-size:22px;}
+</style>
+</head>
+
+<body>
+
+<header>
+  <button class="menu-btn" onclick="toggleMenu()">☰</button>
+  👤 Profile
+</header>
+
+<div id="sidebar" class="sidebar">
+  <a href="index.html">🏠 Dashboard</a>
+  <a href="workouts.html">🔥 Workouts</a>
+  <a href="diet.html">🥗 Diet Plans</a>
+  <a href="progress.html">📊 Progress Tracker</a>
+  <a href="profile.html">👤 Profile</a>
+  <a href="settings.html">⚙️ Settings</a>
+</div>
+<div id="overlay" class="overlay" onclick="toggleMenu()"></div>
+
+<div class="main">
+
+  <div class="profile-card">
+    <div class="profile-pic">👤</div>
+    <h3 id="showName">--</h3>
+    <div class="tag">🏋️ Fitness Person</div>
+
+    <div class="info-row"><b>Height</b><span id="showHeight">--</span> cm</div>
+    <div class="info-row"><b>Weight</b><span id="showWeight">--</span> kg</div>
+    <div class="info-row"><b>Age</b><span id="showAge">--</span></div>
+    <div class="info-row"><b>Gender</b><span id="showGender">--</span></div>
+  </div>
+</div>
+
+<div class="bottom">
+  <button onclick="location.href='index.html'"><span>🏠</span>Home</button>
+  <button onclick="location.href='workouts.html'"><span>🔥</span>Workout</button>
+  <button onclick="location.href='diet.html'"><span>🥗</span>Diet</button>
+  <button class="active" onclick="location.href='profile.html'"><span>👤</span>Profile</button>
+</div>
+
+<script>
+function toggleMenu(){
+  sidebar.classList.toggle("open");
+  overlay.classList.toggle("show");
+}
+
+function loadData(){
+  document.getElementById("showName").innerText = localStorage.getItem("name") || "--";
+  document.getElementById("showHeight").innerText = localStorage.getItem("height") || "--";
+  document.getElementById("showWeight").innerText = localStorage.getItem("weight") || "--";
+  document.getElementById("showAge").innerText = localStorage.getItem("age") || "--";
+  document.getElementById("showGender").innerText = localStorage.getItem("gender") || "--";
+}
+loadData();
+</script>
+
+</body>
+</html>
