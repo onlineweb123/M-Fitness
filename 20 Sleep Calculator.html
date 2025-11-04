@@ -1,97 +1,83 @@
 <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ta">
 <head>
-  <meta charset="UTF-8">
-  <title>Sleep Calculator</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>உறக்கம் சுழற்சி கணிப்பான்</title>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Tamil&display=swap" rel="stylesheet">
   <style>
     body {
       font-family: 'Noto Sans Tamil', sans-serif;
-      background-color: #f5f7fa;
-      color: #333;
-      text-align: center;
+      background: #e6f2ff;
+      color: #003366;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
       padding: 20px;
     }
     h1 {
-      color: #4a90e2;
-    }
-    .card {
-      background-color: #fff;
-      padding: 20px;
-      margin: auto;
-      border-radius: 12px;
-      max-width: 600px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      color: #0059b3;
     }
     input, button {
+      font-size: 18px;
       padding: 10px;
-      margin: 10px;
-      font-size: 1rem;
-      border-radius: 6px;
+      margin: 10px 0;
+      border-radius: 10px;
       border: 1px solid #ccc;
     }
     button {
-      background-color: #4a90e2;
+      background-color: #3399ff;
       color: white;
       border: none;
       cursor: pointer;
     }
-    .result {
-      margin-top: 20px;
-      font-weight: bold;
+    button:hover {
+      background-color: #267acc;
     }
-    .time-list {
-      margin-top: 10px;
+    #results {
+      margin-top: 20px;
+      text-align: center;
+      font-weight: bold;
     }
   </style>
 </head>
 <body>
+  <h1>🛌 உறக்கம் சுழற்சி கணிப்பான்</h1>
+  <label for="wakeTime">எப்போது எழுகிரீர்கள்?</label><br>
+  <input type="time" id="wakeTime" value="07:00" /><br>
+  <button onclick="calculateSleep()">உறக்க நேரம் காண்க</button>
 
-  <div class="card">
-    <h1>🛌 Sleep Calculator</h1>
-    <p>🔸 90 நிமிட தூக்க சுழற்சி அடிப்படையில் (Ideal = 4–6 cycles/night)</p>
-
-    <label>உங்கள் எழும் நேரம்:</label><br>
-    <input type="time" id="wakeTime"><br>
-    <button onclick="calculateBedTimes()">எப்போது உறங்க வேண்டும்?</button>
-
-    <div class="result" id="result"></div>
-  </div>
+  <div id="results"></div>
 
   <script>
-    function calculateBedTimes() {
-      const input = document.getElementById("wakeTime").value;
-      const resultDiv = document.getElementById("result");
+    function calculateSleep() {
+      const wakeTime = document.getElementById('wakeTime').value;
+      const [hours, minutes] = wakeTime.split(':').map(Number);
 
-      if (!input) {
-        resultDiv.innerHTML = "⛔️ தயவுசெய்து எழும் நேரத்தை தேர்வு செய்யவும்.";
-        return;
-      }
+      const wake = new Date();
+      wake.setHours(hours, minutes, 0);
 
-      const [wakeHour, wakeMin] = input.split(":").map(Number);
-      const wakeDate = new Date();
-      wakeDate.setHours(wakeHour, wakeMin, 0, 0);
+      const results = [];
+      const cycles = [6, 5, 4]; // 6, 5, 4 cycle
 
-      const cycleMinutes = 90;
-      const fallAsleepBuffer = 15; // minutes
+      cycles.forEach(cycle => {
+        const sleepTime = new Date(wake.getTime() - cycle * 90 * 60000);
+        const hrs = sleepTime.getHours().toString().padStart(2, '0');
+        const mins = sleepTime.getMinutes().toString().padStart(2, '0');
+        const ampm = sleepTime.getHours() >= 12 ? 'PM' : 'AM';
+        const displayHrs = (sleepTime.getHours() % 12 || 12).toString().padStart(2, '0');
+        results.push(`${displayHrs}:${mins} ${ampm}`);
+      });
 
-      let bedTimes = [];
-
-      for (let i = 6; i >= 4; i--) {
-        const totalMinutes = (cycleMinutes * i) + fallAsleepBuffer;
-        const bedTime = new Date(wakeDate.getTime() - totalMinutes * 60000);
-
-        let hr = bedTime.getHours();
-        let min = bedTime.getMinutes();
-        const suffix = hr >= 12 ? "PM" : "AM";
-        hr = hr % 12 || 12;
-
-        bedTimes.push(`${hr}:${min.toString().padStart(2, '0')} ${suffix} (${i} cycles)`);
-      }
-
-      resultDiv.innerHTML = `<div class="time-list">🕰️ உறங்க வேண்டிய நேரங்கள்:<br><br>${bedTimes.join("<br>")}</div>`;
+      document.getElementById('results').innerHTML = `
+        <p>நீங்கள் ${wakeTime}க்குப் விழிக்கிறீர்கள் என்றால், கீழ்காணும் நேரங்களில் தூங்கினால் சிறந்தது:</p>
+        <ul>
+          ${results.map(time => `<li>${time}</li>`).join('')}
+        </ul>
+        <p>🕒 ஒரு தூக்கச் சுழற்சி 90 நிமிடங்கள் ஆகும்.</p>
+      `;
     }
   </script>
-
 </body>
 </html>
