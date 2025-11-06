@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>Profile - Maathu Fitness</title>
+
+<style>
+:root{
+  --bg:#eef3f8;
+  --card:#ffffff;
+  --border:#d7e0ea;
+  --accent:#0a84ff;
+  --accent2:#00c08b;
+  --text:#1c1c1c;
+}
+
+body{
+  margin:0;
+  font-family:'Poppins',Arial,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  overflow-x:hidden;
+}
+
+*,button,a{
+  transition:0.3s;
+}
+
+header{
+  height:60px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:19px;
+  font-weight:700;
+  position:fixed;
+  top:0;left:0;right:0;
+  background:blue;
+  z-index:10;
+  color:white;
+  box-shadow:0 2px 8px rgba(0,0,0,0.1);
+}
+
+.menu-btn{
+  position:absolute; left:14px;
+  font-size:26px;
+  background:none;
+  border:none;
+  color:white;
+  cursor:pointer;
+}
+
+.sidebar{
+  width:250px; background:#fff;
+  position:fixed; top:0; bottom:0;
+  left:-260px;
+  padding-top:70px;
+  z-index:20;
+  border-right:1px solid var(--border);
+}
+.sidebar.open{ left:0; }
+
+.sidebar a{
+  display:flex; padding:14px 20px; gap:10px;
+  font-size:17px; color:var(--text);
+  text-decoration:none;
+  border-bottom:1px solid #f3f3f3;
+}
+.sidebar a:hover{
+  background:#f4fffc; color:var(--accent);
+  padding-left:28px;
+}
+
+.overlay{
+  position:fixed; inset:0;
+  background:#0006;
+  display:none; z-index:15;
+}
+.overlay.show{ display:block; }
+
+.main{
+  padding:90px 15px 100px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+}
+
+/* 🌿 White Habit Section */
+.habit-section{
+  background:var(--card);
+  color:var(--text);
+  border-radius:20px;
+  padding:35px 25px;
+  box-shadow:0 8px 22px rgba(0,0,0,0.08);
+  text-align:center;
+  width:90%;
+  max-width:400px;
+  border:1px solid var(--border);
+}
+
+.habit-section h2{
+  font-size:22px;
+  font-weight:700;
+  margin-bottom:12px;
+  color:var(--accent);
+}
+
+.habit-section p{
+  font-size:15px;
+  opacity:0.9;
+  margin-bottom:25px;
+}
+
+.habit-btn{
+  background:var(--accent);
+  color:#fff;
+  font-weight:700;
+  border:none;
+  padding:13px 35px;
+  border-radius:30px;
+  cursor:pointer;
+  font-size:16px;
+  box-shadow:0 4px 10px rgba(0,0,0,0.15);
+}
+.habit-btn:hover{
+  background:var(--accent2);
+  transform:scale(1.05);
+}
+
+.bottom{
+  height:60px; position:fixed; bottom:0; left:0; right:0;
+  display:flex; justify-content:space-around; align-items:center;
+  background:#fff; border-top:1px solid var(--border);
+}
+
+.bottom button{
+  background:none; border:none;
+  display:flex; flex-direction:column;
+  font-size:13px; opacity:.6; cursor:pointer;
+}
+
+.bottom button.active,
+.bottom button:hover{
+  opacity:1; color:var(--accent);
+  transform:scale(1.08);
+}
+
+.bottom button span{
+  font-size:22px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <button class="menu-btn" onclick="toggleMenu()">☰</button>
+  ♾️ Habit Tracker
+</header>
+
+<div id="sidebar" class="sidebar">
+  <a href="index.html">🏠 Dashboard</a>
+  <a href="workouts.html">🔥 Workouts</a>
+  <a href="diet.html">🥗 Diet Plans</a>
+  <a href="fit tools.html">📋 Fit Tools</a>
+  <a href="habit traker.html">♾️ Habit Traker</a>
+  <a href="progress.html">📊 Progress Tracker</a>
+  <a href="profile.html">👤 Profile</a>
+  <a href="settings.html">⚙️ Settings</a>
+</div>
+<div id="overlay" class="overlay" onclick="toggleMenu()"></div>
+
+<div class="main">
+
+  <div class="habit-section">
+    <h2>🧠 Your Life Your Control </h2>
+    <p>உங்கள் தினசரி பழக்கங்களை (Habits) பதிவு செய்து முன்னேற்றத்தை கண்காணிக்க.</p>
+    <hr>
+ <p>🟢 Green – You have completed your habit successfully</p><hr>
+<p>🟡 Yellow – You have done your habit partially</p><hr>
+<p>🔴 Red – You have not done your habit</p>
+    
+    
+    
+    <button class="habit-btn" onclick="location.href='habit.html'">🚀 Habit Tracker </button>
+  </div>
+
+</div>
+
+<div class="bottom">
+  <button onclick="location.href='index.html'"><span>🏠</span>Home</button>
+  <button onclick="location.href='workouts.html'"><span>🔥</span>Workout</button>
+  <button onclick="location.href='diet.html'"><span>🥗</span>Diet</button>
+  <button onclick="location.href='profile.html'"><span>👤</span>Profile</button>
+</div>
+
+<script>
+function toggleMenu(){
+  sidebar.classList.toggle("open");
+  overlay.classList.toggle("show");
+}
+</script>
+
+</body>
+</html>

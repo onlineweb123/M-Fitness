@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>Habit Tracker</title>
+
+<style>
+:root{
+  --bg:#eef3f8;
+  --card:#ffffffdd;
+  --border:#d7e0ea;
+  --accent:#007bff;
+  --accent2:#00c08b;
+  --text:#222;
+  --green:#00b050;
+  --yellow:#ffcc00;
+  --red:#ff4b4b;
+}
+
+body{
+  font-family:'Poppins',sans-serif;
+  background:var(--bg);
+  margin:0;
+  padding:0;
+  color:var(--text);
+}
+
+.container{
+  max-width:1200px;
+  margin:30px auto;
+  padding:20px;
+}
+
+h1{
+  text-align:center;
+  color:var(--accent);
+  margin-bottom:20px;
+}
+
+.control-panel{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:20px;
+  padding:15px;
+  margin-bottom:30px;
+  box-shadow:0 4px 10px rgba(0,0,0,0.06);
+}
+
+.control-panel h2{
+  text-align:center;
+  color:var(--accent2);
+}
+
+#habitInput{
+  width:70%;
+  padding:10px;
+  border:1px solid var(--border);
+  border-radius:10px;
+  font-size:15px;
+}
+
+button{
+  border:none;
+  border-radius:10px;
+  cursor:pointer;
+  padding:10px;
+  font-weight:600;
+}
+
+#addBtn{
+  background:var(--accent);
+  color:#fff;
+  margin-left:5px;
+}
+
+.habit-list{
+  margin-top:15px;
+}
+
+.habit-item{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  border:1px solid var(--border);
+  border-radius:10px;
+  padding:10px;
+  margin-bottom:10px;
+  background:#fff;
+}
+
+.habit-name{
+  flex:1;
+}
+
+.color-buttons button{
+  width:28px;
+  height:28px;
+  margin:0 3px;
+  border-radius:50%;
+  border:2px solid #ccc;
+}
+
+.color-buttons .green{background:var(--green);}
+.color-buttons .yellow{background:var(--yellow);}
+.color-buttons .red{background:var(--red);}
+
+.color-buttons button.active{
+  box-shadow:0 0 0 3px #0002;
+  border:2px solid #0005;
+}
+
+#saveBtn{
+  background:var(--accent2);
+  color:#fff;
+  margin-top:10px;
+  width:100%;
+}
+
+#dateLabel{
+  text-align:center;
+  margin-top:10px;
+  font-size:14px;
+  color:var(--accent);
+}
+
+.old-calendar-btn{
+  display:block;
+  text-align:center;
+  margin:15px auto;
+  background:#555;
+  color:#fff;
+  padding:10px 20px;
+  border-radius:10px;
+  width:fit-content;
+}
+
+/* calendar grid */
+.months{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:20px;
+}
+
+.month{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:20px;
+  padding:10px;
+  box-shadow:0 4px 10px rgba(0,0,0,0.06);
+}
+
+.month h2{
+  text-align:center;
+  color:var(--accent);
+  margin:10px 0;
+}
+
+.days{
+  display:grid;
+  grid-template-columns:repeat(7,1fr);
+  gap:5px;
+  justify-items:center;
+}
+
+.day{
+  width:35px;
+  height:35px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:#f3f6f9;
+  border:1px solid var(--border);
+  border-radius:8px;
+  cursor:pointer;
+  font-size:13px;
+  transition:0.2s;
+}
+.day:hover{
+  background:var(--accent2);
+  color:#fff;
+}
+.day.done{ background:var(--green); color:#fff; }
+.day.partial{ background:var(--yellow); color:#fff; }
+.day.missed{ background:var(--red); color:#fff; }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <h1>🗓️ Habit Tracker</h1>
+
+  <div class="control-panel">
+    <h2>🎯 Control System</h2>
+    <div style="display:flex;justify-content:center;align-items:center;">
+      <input type="text" id="habitInput" placeholder="புதிய Habit எழுதுங்கள்">
+      <button id="addBtn" onclick="addHabit()">சேர்</button>
+    </div>
+    <div id="dateLabel"></div>
+
+    <div class="habit-list" id="habitList"></div>
+
+    <button id="saveBtn" onclick="saveDayData()">💾 Save</button>
+  </div>
+
+  <button class="old-calendar-btn" onclick="openOld()">📜 பழைய Calendar</button>
+
+  <div class="months" id="calendar"></div>
+</div>
+
+<button class="old-calendar-btn" style="background:red;" onclick="openDeletePage()">🗑️ Delete Habit</button>
+
+<script>
+    
+    // 🔹 Open Delete Habit Page
+function openDeletePage(){
+  let html = `
+  <div style="padding:20px;">
+    <h2 style="text-align:center;color:var(--red)">🗑️ Habit Delete Page</h2>
+    <div id="deleteList"></div>
+    <button style="
+      display:block;
+      margin:20px auto;
+      padding:10px 20px;
+      border:none;
+      border-radius:10px;
+      background:var(--accent);
+      color:#fff;
+      cursor:pointer;
+    " onclick="backToMain()">🔙 Back</button>
+  </div>`;
+  document.body.innerHTML = html;
+  renderDeleteList();
+}
+
+// 🔹 Render all habits with delete options
+function renderDeleteList(){
+  const div = document.getElementById("deleteList");
+  div.innerHTML = "";
+  if(habits.length === 0){
+    div.innerHTML = `<p style="text-align:center;color:gray;">No habits found!</p>`;
+    return;
+  }
+
+  habits.forEach((h,i)=>{
+    const item = document.createElement("div");
+    item.style.cssText = `
+      background:#fff;
+      border:1px solid var(--border);
+      border-radius:10px;
+      padding:10px;
+      margin-bottom:10px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+    `;
+    item.innerHTML = `
+      <span>${h}</span>
+      <div>
+        <button style="background:var(--red);color:#fff;border:none;border-radius:8px;padding:6px 10px;margin-right:5px;cursor:pointer;"
+          onclick="confirmHabitDelete(${i})">Habit Delete</button>
+        <button style="background:var(--yellow);color:#000;border:none;border-radius:8px;padding:6px 10px;cursor:pointer;"
+          onclick="confirmDataDelete('${h}')">Data Delete</button>
+      </div>
+    `;
+    div.appendChild(item);
+  });
+}
+
+// 🔹 Confirm and Delete Habit (name only)
+function confirmHabitDelete(index){
+  const name = habits[index];
+  if(confirm(`நீங்கள் "${name}" என்ற Habit ஐ நீக்க விரும்புகிறீர்களா?`)){
+    habits.splice(index,1);
+    saveData();
+    alert(`"${name}" Habit நீக்கப்பட்டது.`);
+    renderDeleteList();
+  }
+}
+
+// 🔹 Confirm and Delete Habit Data (from calendar)
+function confirmDataDelete(name){
+  if(confirm(`"${name}" என்ற Habit-ன் அனைத்து தேதிகளின் Data-ஐ நீக்க விரும்புகிறீர்களா?`)){
+    for(let key in dayData){
+      dayData[key] = dayData[key].filter(h => h.name !== name);
+    }
+    saveData();
+    alert(`"${name}" Habit-ன் அனைத்து தேதிகளின் Data நீக்கப்பட்டது.`);
+  }
+}
+
+// 🔹 Return to main calendar page
+function backToMain(){
+  location.reload();
+}
+    
+const months = ["ஜனவரி","பிப்ரவரி","மார்ச்","ஏப்ரல்","மே","ஜூன்","ஜூலை","ஆகஸ்ட்","செப்டம்பர்","அக்டோபர்","நவம்பர்","டிசம்பர்"];
+const daysInMonth = [31,28,31,30,31,30,31,31,30,31,30,31];
+const today = new Date();
+const currentYear = today.getFullYear();
+let habits = JSON.parse(localStorage.getItem("habits_"+currentYear)) || [];
+let dayData = JSON.parse(localStorage.getItem("habitData_"+currentYear)) || {};
+
+function saveData(){
+  localStorage.setItem("habits_"+currentYear, JSON.stringify(habits));
+  localStorage.setItem("habitData_"+currentYear, JSON.stringify(dayData));
+}
+
+function addHabit(){
+  const val = document.getElementById("habitInput").value.trim();
+  if(val){
+    habits.push(val);
+    document.getElementById("habitInput").value="";
+    renderHabits();
+    saveData();
+  }
+}
+
+function renderHabits(){
+  const list = document.getElementById("habitList");
+  list.innerHTML="";
+  habits.forEach((h,i)=>{
+    const div=document.createElement("div");
+    div.className="habit-item";
+    div.innerHTML=`
+      <div class="habit-name">${h}</div>
+      <div class="color-buttons">
+        <button class="green" onclick="setColor(${i},'green')"></button>
+        <button class="yellow" onclick="setColor(${i},'yellow')"></button>
+        <button class="red" onclick="setColor(${i},'red')"></button>
+      </div>`;
+    list.appendChild(div);
+  });
+}
+
+function setColor(index,color){
+  const buttons=document.querySelectorAll(`.habit-item:nth-child(${index+1}) .color-buttons button`);
+  buttons.forEach(b=>b.classList.remove("active"));
+  const btn=document.querySelector(`.habit-item:nth-child(${index+1}) .color-buttons .${color}`);
+  btn.classList.add("active");
+}
+
+function saveDayData(){
+  const dateKey = getCurrentDateKey();
+  dayData[dateKey]=[];
+  const items=document.querySelectorAll(".habit-item");
+  items.forEach((item,i)=>{
+    let color="none";
+    if(item.querySelector(".green.active")) color="green";
+    else if(item.querySelector(".yellow.active")) color="yellow";
+    else if(item.querySelector(".red.active")) color="red";
+    dayData[dateKey].push({name:habits[i],color});
+  });
+  saveData();
+  alert("இந்த நாளின் Habit சேமிக்கப்பட்டது!");
+  createCalendar();
+}
+
+function getCurrentDateKey(){
+  const now=new Date();
+  return `${now.getMonth()+1}-${now.getDate()}`;
+}
+
+function createCalendar(){
+  const cal=document.getElementById("calendar");
+  cal.innerHTML="";
+  months.forEach((m,mi)=>{
+    const monthDiv=document.createElement("div");
+    monthDiv.className="month";
+    monthDiv.innerHTML=`<h2>${m}</h2>`;
+    const daysDiv=document.createElement("div");
+    daysDiv.className="days";
+    for(let d=1;d<=daysInMonth[mi];d++){
+      const box=document.createElement("div");
+      box.className="day";
+      box.textContent=d;
+      const key=`${mi+1}-${d}`;
+      const entry=dayData[key];
+      if(entry){
+        const g=entry.filter(e=>e.color==='green').length;
+        const y=entry.filter(e=>e.color==='yellow').length;
+        const r=entry.filter(e=>e.color==='red').length;
+        if(g>y && g>r) box.classList.add("done");
+        else if(y>=g && y>=r) box.classList.add("partial");
+        else if(r>=g && r>=y) box.classList.add("missed");
+      }
+      box.onclick=()=>openDay(mi+1,d);
+      daysDiv.appendChild(box);
+    }
+    monthDiv.appendChild(daysDiv);
+    cal.appendChild(monthDiv);
+  });
+}
+
+function openDay(month,day){
+  const key=`${month}-${day}`;
+  const entry=dayData[key]||[];
+  let popup=`நாள்: ${day}/${month}/${currentYear}\n\n`;
+
+  entry.forEach(e=>{
+    let label="";
+    if(e.color === "green") label = "High";
+    else if(e.color === "yellow") label = "Medium";
+    else if(e.color === "red") label = "No";
+    else label = "None";
+
+    popup += `${e.name} - ${label}\n`;
+  });
+
+  if(entry.length===0) popup += "தகவல் இல்லை";
+  alert(popup);
+}
+
+function openOld(){
+  let allYears=[];
+  for(let i=0;i<localStorage.length;i++){
+    const key=localStorage.key(i);
+    if(key.startsWith("habitData_")){
+      const year=key.split("_")[1];
+      if(year!=currentYear) allYears.push(year);
+    }
+  }
+  if(allYears.length===0){alert("பழைய வருட Calendar இல்லை!");return;}
+  alert("Old Calendars: "+allYears.join(", "));
+}
+
+function showDate(){
+  const now=new Date();
+  document.getElementById("dateLabel").textContent=`இன்று: ${now.getDate()}/${now.getMonth()+1}/${now.getFullYear()}`;
+}
+
+showDate();
+renderHabits();
+createCalendar();
+</script>
+</body>
+</html>
