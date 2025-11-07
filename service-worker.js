@@ -1,5 +1,3 @@
-self.addEventListener('install', 
-
 const cacheName = 'v1';
 
 const appShellFiles = [
