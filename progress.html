@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ta">
 <head>
 <meta charset="UTF-8">
@@ -59,6 +60,7 @@ header{
 .card{
   padding:18px; background:var(--card); border-radius:18px;
   box-shadow:0 6px 14px rgba(0,0,0,.08); border:1px solid var(--border);
+  margin-bottom:20px;
 }
 
 .chart-box{
@@ -99,8 +101,8 @@ header{
   <a href="index.html">🏠 Dashboard</a>
   <a href="workouts.html">🔥 Workouts</a>
   <a href="diet.html">🥗 Diet Plans</a>
-<a href="fit tools.html">📋 Fit Tools</a>
-<a href="habit traker.html">♾️ Habit Traker</a>
+  <a href="fit tools.html">📋 Fit Tools</a>
+  <a href="habit traker.html">♾️ Habit Traker</a>
   <a href="progress.html">📊 Progress Tracker</a>
   <a href="profile.html">👤 Profile</a>
   <a href="settings.html">⚙️ Settings</a>
@@ -109,6 +111,13 @@ header{
 <div id="overlay" class="overlay" onclick="toggleMenu()"></div>
 
 <div class="main">
+
+  <div class="card">
+    <h3>📅 Select Month</h3>
+    <select id="monthSelect" onchange="loadHistory()">
+      <option value="current">📈 Current Month</option>
+    </select>
+  </div>
 
   <div class="card">
     <h3>📈 Monthly Workout Stats</h3>
@@ -123,7 +132,7 @@ header{
   <button onclick="location.href='index.html'"><span>🏠</span>Home</button>
   <button onclick="location.href='workouts.html'"><span>🔥</span>Workout</button>
   <button onclick="location.href='diet.html'"><span>🥗</span>Diet</button>
-  <button class=""   onclick="location.href='profile.html'"><span>👤</span>Profile</button>
+  <button class="" onclick="location.href='profile.html'"><span>👤</span>Profile</button>
 </div>
 
 <script>
@@ -132,26 +141,67 @@ function toggleMenu(){
   document.getElementById("overlay").classList.toggle("show");
 }
 
-const box = document.getElementById("daysChart");
-const d = new Date();
-let y = d.getFullYear(), m = d.getMonth();
-let total = new Date(y, m+1, 0).getDate();
-let today = d.getDate();
+// --- CHART CREATION FUNCTION ---
+function renderChart(done, medium, totalDays, today){
+  const box = document.getElementById("daysChart");
+  box.innerHTML = "";
+  for(let i=1;i<=totalDays;i++){
+    let bar = document.createElement("div");
+    bar.className = "chart-bar";
 
-let done = JSON.parse(localStorage.getItem("doneWorkoutDays")) || [];
-let medium = JSON.parse(localStorage.getItem("mediumWorkoutDays")) || [];
+    if(i>today){ bar.classList.add("future"); bar.style.height="20%"; }
+    else if(done.includes(i)){ bar.classList.add("completed"); bar.style.height="100%"; }
+    else if(medium.includes(i)){ bar.classList.add("medium"); bar.style.height="60%"; }
+    else{ bar.classList.add("missed"); bar.style.height="35%"; }
 
-for(let i=1;i<=total;i++){
-  let bar = document.createElement("div");
-  bar.className = "chart-bar";
-
-  if(i>today){ bar.classList.add("future"); bar.style.height="20%"; }
-  else if(done.includes(i)){ bar.classList.add("completed"); bar.style.height="100%"; }
-  else if(medium.includes(i)){ bar.classList.add("medium"); bar.style.height="60%"; }
-  else{ bar.classList.add("missed"); bar.style.height="35%"; }
-
-  box.appendChild(bar);
+    box.appendChild(bar);
+  }
 }
+
+// --- LOAD HISTORY MONTHS IN DROPDOWN ---
+function loadHistoryList(){
+  const select = document.getElementById("monthSelect");
+  for(let key in localStorage){
+    if(key.startsWith("history_done_")){
+      let m = key.split("_")[3];
+      let y = key.split("_")[2];
+      let opt = document.createElement("option");
+      opt.value = `${y}_${m}`;
+      opt.textContent = `${y} - Month ${parseInt(m)+1}`;
+      select.appendChild(opt);
+    }
+  }
+}
+
+// --- LOAD SELECTED MONTH DATA ---
+function loadHistory(){
+  const select = document.getElementById("monthSelect").value;
+  const d = new Date();
+  let y = d.getFullYear(), m = d.getMonth();
+  let total = new Date(y, m+1, 0).getDate();
+  let today = d.getDate();
+
+  let done, medium;
+
+  if(select === "current"){
+    done = JSON.parse(localStorage.getItem("doneWorkoutDays")) || [];
+    medium = JSON.parse(localStorage.getItem("mediumWorkoutDays")) || [];
+  }else{
+    let parts = select.split("_");
+    y = parseInt(parts[0]);
+    m = parseInt(parts[1]);
+    total = new Date(y, m+1, 0).getDate();
+    today = total; // full month view
+    done = JSON.parse(localStorage.getItem(`history_done_${y}_${m}`)) || [];
+    medium = JSON.parse(localStorage.getItem(`history_medium_${y}_${m}`)) || [];
+  }
+
+  renderChart(done, medium, total, today);
+}
+
+// --- INITIAL LOAD ---
+loadHistoryList();
+loadHistory();
 </script>
 
 </body>
