@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ta">
 <head>
 <meta charset="UTF-8">
@@ -96,7 +97,6 @@ input,select{
 .overlay.show{
   display:block;
 }
-
 </style>
 </head>
 
@@ -111,8 +111,8 @@ input,select{
   <a href="index.html">🏠 Dashboard</a>
   <a href="workouts.html">🔥 Workouts</a>
   <a href="diet.html">🥗 Diet Plans</a>
-<a href="fit tools.html">📋 Fit Tools</a>
-<a href="habit traker.html">♾️ Habit Traker</a>
+  <a href="fit tools.html">📋 Fit Tools</a>
+  <a href="habit traker.html">♾️ Habit Traker</a>
   <a href="progress.html">📊 Progress Tracker</a>
   <a href="profile.html">👤 Profile</a>
   <a href="settings.html">⚙️ Settings</a>
@@ -129,11 +129,11 @@ input,select{
     <input type="text" id="name" placeholder="Name">
     <input type="number" id="age" placeholder="Age">
     <select id="gender">
-  <option value="">Select Gender</option>
-  <option value="Male">Male</option>
-  <option value="Female">Female</option>
-  <option value="Other">Other</option>
-</select>
+      <option value="">Select Gender</option>
+      <option value="Male">Male</option>
+      <option value="Female">Female</option>
+      <option value="Other">Other</option>
+    </select>
     <input type="number" id="weight" placeholder="Weight (kg)">
     <input type="number" id="height" placeholder="Height (cm)">
 
@@ -222,7 +222,6 @@ function saveProfile(){
   localStorage.setItem("goal", inputGoal.value);
   localStorage.setItem("workout-level", inputWorkout.value);
   localStorage.setItem("diet", inputDiet.value);
-
   alert("✅ Profile Saved!");
 }
 
@@ -234,13 +233,6 @@ function saveToday(val){
 }
 
 // ✅ Final Save Today
-function saveTodayStatus(){
-  if(todayStatus === ""){ alert("Select today's workout first!"); return; }
-  let today = new Date().toISOString().split('T')[0];
-  localStorage.setItem("todayWorkout", todayStatus);
-  localStorage.setItem("workout_"+today, todayStatus);
-  alert("🔥 Today's Workout Saved: " + todayStatus);
-}
 function saveTodayStatus(){
   if(todayStatus === ""){ 
     alert("Select today's workout first!"); 
@@ -269,8 +261,7 @@ function saveTodayStatus(){
   } 
   else if(todayStatus.includes("🟡")){
     mediumDays.push(day);
-  } 
-  // ❌ case = skip (missed auto handle in graph)
+  }
 
   // Save arrays back
   localStorage.setItem("doneWorkoutDays", JSON.stringify(doneDays));
@@ -278,6 +269,40 @@ function saveTodayStatus(){
 
   alert("🔥 Workout Saved: " + todayStatus);
 }
+
+// ✅ Monthly Reset System (Auto Archive & Reset)
+const currentDate = new Date();
+const currentMonth = currentDate.getMonth();
+const currentYear = currentDate.getFullYear();
+
+const savedMonth = localStorage.getItem("currentMonth");
+const savedYear = localStorage.getItem("currentYear");
+
+// First time setup
+if (savedMonth == null || savedYear == null) {
+    localStorage.setItem("currentMonth", currentMonth);
+    localStorage.setItem("currentYear", currentYear);
+} 
+// If month or year changed, archive and reset
+else if (parseInt(savedMonth) !== currentMonth || parseInt(savedYear) !== currentYear) {
+    const archiveKeyDone = `history_done_${savedYear}_${savedMonth}`;
+    const archiveKeyMedium = `history_medium_${savedYear}_${savedMonth}`;
+    
+    // Save previous month data
+    localStorage.setItem(archiveKeyDone, localStorage.getItem("doneWorkoutDays"));
+    localStorage.setItem(archiveKeyMedium, localStorage.getItem("mediumWorkoutDays"));
+
+    // Reset current data
+    localStorage.setItem("doneWorkoutDays", JSON.stringify([]));
+    localStorage.setItem("mediumWorkoutDays", JSON.stringify([]));
+
+    // Update to current month
+    localStorage.setItem("currentMonth", currentMonth);
+    localStorage.setItem("currentYear", currentYear);
+
+    console.log("✅ New Month Started! Previous month data archived successfully.");
+}
+
 
 </script>
 
