@@ -59,16 +59,34 @@ self.addEventListener('install', (e) => {
   );
 });
 
-// ✅ Fetch Event
+// ✅ Fetch Event (Improved for Offline Navigation)
 self.addEventListener('fetch', (e) => {
+  // 👉 If it's a navigation request (page navigation)
+  if (e.request.mode === 'navigate') {
+    e.respondWith(
+      caches.match(e.request).then((response) => {
+        return (
+          response ||
+          caches.match('./index.html') || // fallback if page not cached
+          fetch(e.request)
+        );
+      })
+    );
+    return;
+  }
+
+  // 👉 For all other requests (CSS, JS, images, etc.)
   e.respondWith(
     caches.match(e.request).then((r) => {
-      return r || fetch(e.request).then((response) => {
-        return caches.open(cacheName).then((cache) => {
-          cache.put(e.request, response.clone());
-          return response;
-        });
-      });
+      return (
+        r ||
+        fetch(e.request).then((response) => {
+          return caches.open(cacheName).then((cache) => {
+            cache.put(e.request, response.clone());
+            return response;
+          });
+        })
+      );
     })
   );
 });
