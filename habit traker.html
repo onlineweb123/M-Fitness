@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ta">
 <head>
 <meta charset="UTF-8">
@@ -80,7 +81,7 @@ header{
 .overlay.show{ display:block; }
 
 .main{
-  padding:90px 15px 100px;
+  
   display:flex;
   justify-content:center;
   align-items:center;
@@ -173,19 +174,60 @@ header{
 <div id="overlay" class="overlay" onclick="toggleMenu()"></div>
 
 <div class="main">
+<div class="main" style="
+    min-height:90vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    padding:0 15px; /* மேலே-கீழே extra space இல்லாமல் */
+    margin-top:60px; /* header height compensate */
+">
 
-  <div class="habit-section">
-    <h2>🧠 Your Life Your Control </h2>
-    <p>உங்கள் தினசரி பழக்கங்களை (Habits) பதிவு செய்து முன்னேற்றத்தை கண்காணிக்க.</p>
-    <hr>
- <p>🟢 Green – You have completed your habit successfully</p><hr>
-<p>🟡 Yellow – You have done your habit partially</p><hr>
-<p>🔴 Red – You have not done your habit</p>
-    
-    
-    
-    <button class="habit-btn" onclick="location.href='habit.html'">🚀 Habit Tracker </button>
+  <div class="habit-card" style="
+      background:var(--card);
+      border-radius:22px;
+      padding:30px 25px;
+      box-shadow:0 8px 22px rgba(0,0,0,0.14);
+      text-align:center;
+      width:88%;
+      max-width:460px;
+      transition:0.3s;
+  "
+  onmouseover="this.style.transform='translateY(-6px)'; this.style.boxShadow='0 12px 32px rgba(0,0,0,0.18)';"
+  onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 8px 22px rgba(0,0,0,0.14)';"
+  >
+    <h2 style="font-size:24px; font-weight:700; margin-bottom:14px; color:var(--accent);">🧠 Your Life, Your Control</h2>
+    <p style="font-size:16px; color:#555; line-height:1.6; margin-bottom:18px;">
+      உங்கள் தினசரி பழக்கங்களை பதிவு செய்து முன்னேற்றத்தை கண்காணிக்க.
+    </p>
+
+    <div style="text-align:left; margin-bottom:18px; font-size:15px; color:#333;">
+      <div style="padding:8px 0; border-bottom:1px solid #eee;">🟢 <strong>Green</strong> – Completed successfully</div>
+      <div style="padding:8px 0; border-bottom:1px solid #eee;">🟡 <strong>Yellow</strong> – Partially done</div>
+      <div style="padding:8px 0;">🔴 <strong>Red</strong> – Not done</div>
+    </div>
+
+    <button style="
+        background:var(--accent);
+        color:#fff;
+        font-weight:700;
+        border:none;
+        padding:14px 38px;
+        border-radius:32px;
+        cursor:pointer;
+        font-size:16px;
+        box-shadow:0 5px 14px rgba(0,0,0,0.17);
+        transition:0.3s;
+    "
+    onmouseover="this.style.transform='scale(1.06)'; this.style.background='var(--accent2)';"
+    onmouseout="this.style.transform='scale(1)'; this.style.background='var(--accent)';"
+    onclick="location.href='habit.html'">
+      🚀 Habit Tracker
+    </button>
   </div>
+
+</div>
 
 </div>
 
