@@ -238,65 +238,6 @@ body {
 
 <body>
 
-<!-- 🌟 Premium Code Entry ஆரம்பம் -->
-<div id="premiumOverlay" style="
-  position:fixed; 
-  top:0; left:0; width:100%; height:100%; 
-  backdrop-filter: blur(10px); 
-  background:rgba(0,0,0,0.6); 
-  display:flex; 
-  justify-content:center; 
-  align-items:center; 
-  z-index:9999;">
-  
-  <div style="
-    background:#ffffffee; 
-    padding:35px 30px; 
-    border-radius:20px; 
-    box-shadow:0 8px 20px rgba(0,0,0,0.3); 
-    width:320px; 
-    max-width:90%; 
-    text-align:center;">
-    
-    <h2 style="margin-bottom:25px; color:#0b63d6; font-family:Poppins,sans-serif;">
-      🔐 Enter Your Premium Code
-    </h2>
-    
-    <form id="premiumForm">
-      <input 
-        type="password" 
-        id="premiumCode" 
-        placeholder="Enter Premium Code" 
-        style="width:100%; padding:12px; border-radius:10px; border:1px solid #ccc; font-size:16px; text-align:center;">
-      
-      <button type="submit" style="
-        width:100%; margin-top:20px; padding:12px; 
-        background:#0b63d6; color:#fff; border:none; 
-        border-radius:10px; font-weight:600; cursor:pointer;">
-        Unlock
-      </button>
-      
-      <p id="errorMsg" style="color:red; margin-top:10px; display:none; font-family:Poppins,sans-serif;">
-        ❌ Invalid Code
-      </p>
-    </form>
-  </div>
-</div>
-
-<script>
-document.getElementById("premiumForm").addEventListener("submit", function(e){
-  e.preventDefault();
-  var code = document.getElementById("premiumCode").value.trim();
-
-  // ✅ உன் Premium Code இங்கே மாற்றிக்கோ
-  if(code === "667834","654687"," 689633"){
-      document.getElementById("premiumOverlay").style.display = "none";
-  } else {
-      document.getElementById("errorMsg").style.display = "block";
-  }
-});
-</script>
-<!-- 🌟 Premium Code Entry முடிவு -->
 
 <header>
   <button class="menu-btn" onclick="toggleMenu()">☰</button>
