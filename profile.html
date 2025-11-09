@@ -119,6 +119,35 @@ h3{margin:10px 0 5px;}
   transform:scale(1.08);
 }
 .bottom button span{font-size:22px;}
+
+ .buttonpre {
+    color: white;
+    background: #005bf5;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    padding: 15px;
+    margin: 1.5px;
+    width: 100%;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 91, 245, 0.3);
+    transition: all 0.3s ease;
+}
+
+.buttonpre:hover {
+    background: #1d4ed8;
+    box-shadow: 0 6px 15px rgba(0, 91, 245, 0.4);
+    transform: translateY(-2px);
+}
+
+.buttonpre:active {
+    transform: translateY(1px);
+    box-shadow: 0 3px 8px rgba(0, 91, 245, 0.3);
+}
+
+
+
 </style>
 </head>
 
@@ -154,6 +183,30 @@ h3{margin:10px 0 5px;}
     <div class="info-row"><b>Gender</b><span id="showGender">--</span></div>
   </div>
 </div>
+
+
+
+<div class="profile-card">
+  <h2>Premium Code</h2>
+
+  <div class="premium">
+    <button class="buttonpre" onclick="window.location.href='index.html'">
+      Free Trial
+    </button>
+  </div>
+  <br>
+
+  <div class="button">
+    <button class="buttonpre" onclick="window.location.href='index.html'">
+      Unlock
+    </button>
+  </div>
+  <br>
+</div>
+
+
+
+
 
 <div class="bottom">
   <button onclick="location.href='index.html'"><span>🏠</span>Home</button>
