@@ -66,7 +66,11 @@ header{
 }
 .overlay.show{display:block;}
 
-.main{padding:90px 15px 90px;}
+.main {
+  padding: 90px 15px 90px;
+  overflow-y: auto;
+  max-height: calc(100vh - 120px);
+}
 
 /* Profile Display */
 .profile-card{
