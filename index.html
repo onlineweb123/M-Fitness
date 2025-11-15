@@ -125,6 +125,7 @@ header{
   <a href="progress.html">📊 Progress Tracker</a>
   <a href="profile.html">👤 Profile</a>
   <a href="settings.html">⚙️ Settings</a>
+  <a href="#" onclick="shareApp()">🔁 Share</a>
 </div>
 
 <div id="overlay" class="overlay" onclick="toggleMenu()"></div>
@@ -200,6 +201,18 @@ for(let i = 1; i <= totalDays; i++){
   daysContainer.appendChild(bar);
 }
 
+function shareApp(){
+    if (navigator.share) {
+        navigator.share({
+            title: "Z Fitness",
+            text: "Check out this Fitness App!",
+            url: "https://onlineweb123.github.io/Z-Fitness/"
+        })
+        .catch(err => console.log("Share cancelled"));
+    } else {
+        alert("Your device does not support sharing.");
+    }
+}
 
 </script>
 </body>
